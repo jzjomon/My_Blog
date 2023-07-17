@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="stylesheet/login.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid d-flex flex-column justify-content-center ">
+        <div class="row ">
+            <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-5 col-sm-7 main  m-auto d-flex flex-column  align-content-center ">
+                <div class="d-flex justify-content-center h-25 mt-5">
+                    <img src="https://img.freepik.com/free-icon/user_318-159711.jpg"  alt="" class="img">
+                </div>
+                <div class="form">
+                    <form action="" method="post" class="d-flex flex-column p-5 gap-5" onsubmit="return validateAll()">
+                        <div>
+                            <input class="input" id="email" type="text" name="email" placeholder="   &#x1F4E7    Email ID" onkeyup="validateEmail()">
+                            <p id="warningEmail" class="warningP"></p>
+                        </div>
+                        <div>
+                            <input class="input" id="password" type="password" name="Password" placeholder="   &#128274    Password" onkeyup="validatePassword()">
+                            <p id="warningPassword" class="warningP"></p>
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between">
+                            <span class="rf"><input type="checkbox" class=""> Remember me</span>
+                            <a href="" class="text-decoration-none rf"><span class="fst-italic">Forgot Password?</span></a>
+                            </div>
+                            <div class="d-flex justify-content-center mt-4 flex-column">
+                                <button class="rounded-4 login">LOGIN</button>
+                                <span class="ps-4 singUP">Don't have an account? <a href="signup" class="text-decoration-none ">Sign Up</a></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
+</body>
+
+</html>
