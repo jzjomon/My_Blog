@@ -4,4 +4,7 @@ const doLogin = (req,res)=>{
 const doSignUp = (req,res)=>{
     res.render('signUp')
 }
-module.exports = { doLogin , doSignUp }
+const goHome = (req,res)=>{
+    res.render('home')
+}
+module.exports = { doLogin , doSignUp , goHome }

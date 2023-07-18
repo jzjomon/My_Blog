@@ -30,7 +30,7 @@ function validateEmail(){
         return true;
     }else{
         document.querySelector("#warningEmail").innerHTML = "enter your email id";
-        document.querySelector('#warningEmial').style.color = "grey"
+        document.querySelector('#warningEmail').style.color = "grey"
         return false;
     }
 }
@@ -58,7 +58,7 @@ function validatePassword(pass){
     }
 }
 function validateAll(){
-    if(validateFname() && validateLname() && validateEmail() && validatePass() && validatePassword()){
+    if(validateFname() && validateLname() && validateEmail() && validatePass() && validatePass()){
         return true
     }else{
         document.querySelector("#warningPass").innerHTML = "password must be alphanumeric and atleast 6 characters";

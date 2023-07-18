@@ -1,0 +1,37 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.collapse{
+    margin-left: 30%;
+}
+.section1{
+    height: 5000px;
+    background-image: linear-gradient(to bottom right,rgb(87, 34, 126),rgb(161, 40, 84),rgb(124, 58, 171));
+}
+.side-section{
+    width: 30%;
+    height: 100vh;
+    position: fixed;
+}
+.main-section{
+    width: 70%;
+    position: absolute;
+    right: 0px;
+}
+.logo{
+    border-radius: 100%;
+}
+.author-img{
+    border-radius: 100%;
+    width: 8%;
+    height: 8%;
+}
+.navbar{
+    background-image: linear-gradient(to bottom right,rgb(87, 34, 126),rgb(161, 40, 84),rgb(124, 58, 171));
+}
+.main-logo{
+    border-radius: 100%;
+}
