@@ -6,7 +6,7 @@ function validateEmail(){
         return true;
     }else{
         document.querySelector('#warningEmail').innerHTML = "invalid email id";
-        document.querySelector('#warningEmail').style.color = "grey";
+        document.querySelector('#warningEmail').style.color = "red";
         return false;
     }
 }
@@ -18,7 +18,7 @@ function validatePassword(){
         return true;
     }else{
         document.querySelector('#warningPassword').innerHTML = "incorrect password";
-        document.querySelector('#warningPassword').style.color = "grey";
+        document.querySelector('#warningPassword').style.color = "red";
         return false;
     }
 }
@@ -29,9 +29,10 @@ function validateAll(){
         return true
     }else{
         document.querySelector('#warningPassword').innerHTML = "incorrect password";
-        document.querySelector('#warningPassword').style.color = "grey";
+        document.querySelector('#warningPassword').style.color = "red";
         document.querySelector('#warningEmail').innerHTML = "invalid email id";
-        document.querySelector('#warningEmail').style.color = "grey";
+        document.querySelector('#warningEmail').style.color = "red";
+        document.querySelector('.forgot').style.color = "black"
         return false
     }
 }

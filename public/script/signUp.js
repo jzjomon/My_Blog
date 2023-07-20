@@ -6,7 +6,7 @@ function validateFname(){
         return true;
     }else{
         document.querySelector("#warningFname").innerHTML = "enter your first name";
-        document.querySelector('#warningFname').style.color = "grey"
+        document.querySelector('#warningFname').style.color = "red"
         return false;
     }
 }
@@ -18,7 +18,7 @@ function validateLname(){
         return true;
     }else{
         document.querySelector("#warningLname").innerHTML = "enter your last name";
-        document.querySelector('#warningLname').style.color = "grey"
+        document.querySelector('#warningLname').style.color = "red"
         return false;
     }
 }
@@ -30,7 +30,7 @@ function validateEmail(){
         return true;
     }else{
         document.querySelector("#warningEmail").innerHTML = "enter your email id";
-        document.querySelector('#warningEmail').style.color = "grey"
+        document.querySelector('#warningEmail').style.color = "red"
         return false;
     }
 }
@@ -42,7 +42,7 @@ function validatePass(){
         return true;
     }else{
         document.querySelector('#warningPass').innerHTML = "password must be alphanumeric and atleast 6 characters";
-        document.querySelector('#warningPass').style.color = "grey"
+        document.querySelector('#warningPass').style.color = "red"
         return false
     }
 }
@@ -53,7 +53,7 @@ function validatePassword(pass){
         return true
     }else{
         document.querySelector('#warningPassword').innerHTML = "passwords are not same"
-        document.querySelector('#warningPassword').style.color = "grey"
+        document.querySelector('#warningPassword').style.color = "red"
         return false
     }
 }
@@ -62,13 +62,13 @@ function validateAll(){
         return true
     }else{
         document.querySelector("#warningPass").innerHTML = "password must be alphanumeric and atleast 6 characters";
-        document.querySelector('#warningPass').style.color = "grey"
+        document.querySelector('#warningPass').style.color = "red"
         document.querySelector("#warningEmail").innerHTML = "enter your email id";
-        document.querySelector('#warningEmail').style.color = "grey"
+        document.querySelector('#warningEmail').style.color = "red"
         document.querySelector("#warningLname").innerHTML = "enter your last name";
-        document.querySelector('#warningLname').style.color = "grey"
+        document.querySelector('#warningLname').style.color = "red"
         document.querySelector("#warningFname").innerHTML = "enter your first name";
-        document.querySelector('#warningFname').style.color = "grey";
+        document.querySelector('#warningFname').style.color = "red";
         return false
     }
 }
