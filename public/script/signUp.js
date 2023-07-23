@@ -59,6 +59,21 @@ function validatePassword(pass){
 }
 function validateAll(){
     if(validateFname() && validateLname() && validateEmail() && validatePass() && validatePass()){
+        let formdata = {};
+        formdata.fname = document.querySelector('#fname').value
+        formdata.lname = document.querySelector('#lname').value;
+        formdata.email = document.querySelector('#email').value;
+        formdata.pass = document.querySelector('#pass').value;
+        formdata.password = document.querySelector('#password').value;
+        fetch('/reqHome',{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(formdata)
+        }).then(()=>{
+            window.location.href = '/home'
+        })
         return true
     }else{
         document.querySelector("#warningPass").innerHTML = "password must be alphanumeric and atleast 6 characters";
