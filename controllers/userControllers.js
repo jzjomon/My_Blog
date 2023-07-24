@@ -22,4 +22,7 @@ const reqHome = (req,res)=>{
 const goHome = (req,res) =>{
     res.render('home')
 }
-module.exports = {doLogin,doSignUp,reqHome,goHome}
+const goProfile = (req,res) =>{
+    res.render('profile')
+}
+module.exports = {doLogin,doSignUp,reqHome,goHome,goProfile}
