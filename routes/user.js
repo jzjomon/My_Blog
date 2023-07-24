@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const {doLogin,doSignUp,reqHome,goHome,goProfile} = require('../controllers/userControllers')
+const {login,signup,dosignup,dologin,Home,Profile} = require('../controllers/userControllers')
 
-router.get('/',doLogin)
-router.get('/signup',doSignUp)
-router.post('/reqhome',reqHome)
-router.get('/home',goHome)
-router.get('/profile',goProfile)
+router.get('/',login)
+router.get('/signup',signup)
+router.post('/dosignup',dosignup)
+router.post('/dologin',dologin)
+router.get('/home',Home)
+router.get('/profile',Profile)
 
 module.exports=router;

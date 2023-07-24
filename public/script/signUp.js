@@ -63,16 +63,20 @@ function validateAll(){
         formdata.fname = document.querySelector('#fname').value
         formdata.lname = document.querySelector('#lname').value;
         formdata.email = document.querySelector('#email').value;
-        formdata.pass = document.querySelector('#pass').value;
-        formdata.password = document.querySelector('#password').value;
-        fetch('/reqHome',{
+        formdata.password = document.querySelector('#pass').value;
+        fetch('/dosignup',{
             method:"post",
             headers:{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify(formdata)
-        }).then(()=>{
-            window.location.href = '/home'
+        }).then((res) => res.json())
+        .then((res) => {
+            if(res.signup){
+                window.location.href = '/home';
+            }else{
+                alert('you already have an account. please login');
+            }
         })
         return true
     }else{

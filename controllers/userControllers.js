@@ -1,28 +1,42 @@
-// const mongoose = require('mongoose');
-// const USER = require('../models/userModel').users;
+const mongoose = require('mongoose');
+const USER = require('../models/userModel').users;
 
 
-const doLogin = (req,res)=>{
+const login = (req,res)=>{
     res.render('login')
 }
-const doSignUp = (req,res)=>{
+const signup = (req,res)=>{
     res.render('signUp')
 }
-const reqHome = (req,res)=>{
-    res.json({login:true});
-
-    // USER({email:req.body.email,
-    //     password:req.body.password
-    // }).save().then(()=>{
-    //     res.json({login:true})
-    // }).catch(()=>{
-    //     res.json({login:false})
-    // })
+const dosignup = (req,res)=>{
+    USER.find({email:req.body.email,password:req.body.password}).then((response)=>{
+        if(response.length > 0){
+            res.json({signup:false})
+        }else{
+            USER({
+                firstName:req.body.fname,
+                lastName:req.body.lname,
+                email:req.body.email,
+                password:req.body.password
+            }).save().then(()=>{
+                res.json({signup:true})
+            })
+        }
+    })
 }
-const goHome = (req,res) =>{
+const  dologin = (req,res)=>{
+    USER.find({email:req.body.email,password:req.body.password}).then((response)=>{
+        if(response.length > 0){
+            res.json({login:true})
+        }else{
+            res.json({login:false})
+        }
+    })
+}
+const Home = (req,res) =>{
     res.render('home')
 }
-const goProfile = (req,res) =>{
+const Profile = (req,res) =>{
     res.render('profile')
 }
-module.exports = {doLogin,doSignUp,reqHome,goHome,goProfile}
+module.exports = {login,signup,dosignup,dologin,Home,Profile}
