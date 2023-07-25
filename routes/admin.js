@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const {login,doLogin,home} = require('../controllers/adminControllers')
 
-router.get('/',(req,res)=>{
-    res.send("hi you are in admin login")
-})
-
+router.get('/',login)
+router.post('/doLogin',doLogin)
+router.get('/home',home)
 module.exports=router;

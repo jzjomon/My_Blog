@@ -3,10 +3,10 @@ const USER = require('../models/userModel').users;
 
 
 const login = (req,res)=>{
-    res.render('login')
+    res.render('user/login')
 }
 const signup = (req,res)=>{
-    res.render('signUp')
+    res.render('user/signUp')
 }
 const dosignup = (req,res)=>{
     USER.find({email:req.body.email,password:req.body.password}).then((response)=>{
@@ -19,7 +19,7 @@ const dosignup = (req,res)=>{
                 email:req.body.email,
                 password:req.body.password
             }).save().then(()=>{
-                res.json({signup:true})
+                res.status(200).json({signup:true})
             })
         }
     })
@@ -27,16 +27,16 @@ const dosignup = (req,res)=>{
 const  dologin = (req,res)=>{
     USER.find({email:req.body.email,password:req.body.password}).then((response)=>{
         if(response.length > 0){
-            res.json({login:true})
+            res.status(200).json({login:true})
         }else{
             res.json({login:false})
         }
     })
 }
 const Home = (req,res) =>{
-    res.render('home')
+    res.render('user/home')
 }
 const Profile = (req,res) =>{
-    res.render('profile')
+    res.render('user/profile')
 }
 module.exports = {login,signup,dosignup,dologin,Home,Profile}
