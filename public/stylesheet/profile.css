@@ -1,25 +1,27 @@
-.header-tag{
-    background-color: rgb(211, 211, 211);
-    border-style: double;
-    border-color: rgb(79, 79, 79);
-    position: sticky;
-    top: 0;
-    z-index: 2;
-}
-.profile-img{
-    border-radius: 100%;
-    max-width: 100px;
-    max-height: 100px;
-}
-.edit-btn{
-    background-color: rgb(157, 157, 157);
-}
-.logout-btn{
-    text-decoration: none;
-}
-.section{
+.main-container{
     background-image: url("https://img.freepik.com/free-photo/office-table-with-cup-coffee-keyboard-notepad_1220-4618.jpg?t=st=1689789620~exp=1689790220~hmac=df655aff8b239dec4039ac4c5be3832d39ac786cb42383e8a2deedb3906f9e3e");
+    height:100vh ;
+    width: 100vw;
     background-repeat: no-repeat;
-    background-size:cover;
-    background-position: center;
+    background-size: cover;
+}
+.main{
+    height: 600px;
+    border-color: rgb(48, 51, 50);
+    border-radius: 20px;
+    border-style: double;
+}
+.main-img{
+    width: 40%;
+    margin: 20px;
+}
+.d-list{
+    list-style: none;
+    font-size: larger;
+    font-weight: bold;
+    padding: 40px;
+}
+li{
+    border-bottom: 2px solid black;
+    margin-bottom: 10px;
 }

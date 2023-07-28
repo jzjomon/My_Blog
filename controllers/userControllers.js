@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const USER = require('../models/userModel').users;
-
+const {USER} = require('../models/userModel');
+const UPLOADS = require('../models/blogModel');
 
 const login = (req,res)=>{
     res.render('user/login')
@@ -34,7 +34,9 @@ const  dologin = (req,res)=>{
     })
 }
 const Home = (req,res) =>{
-    res.render('user/home')
+    UPLOADS.find().then( response =>{
+        res.render('user/home',{data:response})
+    })
 }
 const Profile = (req,res) =>{
     res.render('user/profile')

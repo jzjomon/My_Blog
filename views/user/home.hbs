@@ -36,7 +36,6 @@
               <a class="nav-link text-" href="#blogs">Blogs</a>
             </li>
           </ul>
-          <span class="me-3 fs-6">Create Blog<i class="fa-solid fa-plus ps-2"></i></span>
           <form class="d-flex me-5" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
             <button class="btn text-dark border border-white" type="submit">Search</button>
@@ -66,9 +65,11 @@
         </div>
         <div class="options text-center">
           <ul>
-            <li class="list-unstyled"><button class="btn text-dark border mb-3 mt-5">travel blogs</button></li>
-            <li class="list-unstyled"><button class="btn text-dark border mb-3">food blogs</button></li>
-            <li class="list-unstyled"><button class="btn text-dark border mb-3">travel blogs</button></li>
+            <li class="list-unstyled"><button class="btn text-dark border mb-3 mt-5">Travel</button></li>
+            <li class="list-unstyled"><button class="btn text-dark border mb-3">Technology</button></li>
+            <li class="list-unstyled"><button class="btn text-dark border mb-3">Nature</button></li>
+            <li class="list-unstyled"><button class="btn text-dark border mb-3">Health</button></li>
+            <li class="list-unstyled"><button class="btn text-dark border mb-3">Automobile</button></li>
           </ul>
         </div>
       </div>
@@ -134,86 +135,18 @@
         </div>
         <div class="container">
           <div class="row d-flex justify-content-center">
+            {{#each data}}
             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
               <div class="card">
                 <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWmc523EW0ahMBBVggFGjLmwa0yvED_H0Bb1hoiUjwQg&s"
+                  src="/assets/{{this.images.[0].filename}}"
                   class="card-img-top" alt="..." />
                 <div class="card-body">
-                  <p class="card-text">Some quick example text </p>
+                  <p class="card-text">{{this.heading}}</p>
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
-              <div class="card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWmc523EW0ahMBBVggFGjLmwa0yvED_H0Bb1hoiUjwQg&s"
-                  class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Some quick example text </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
-              <div class="card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWmc523EW0ahMBBVggFGjLmwa0yvED_H0Bb1hoiUjwQg&s"
-                  class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Some quick example text </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
-              <div class="card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWmc523EW0ahMBBVggFGjLmwa0yvED_H0Bb1hoiUjwQg&s"
-                  class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Some quick example text </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
-              <div class="card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWmc523EW0ahMBBVggFGjLmwa0yvED_H0Bb1hoiUjwQg&s"
-                  class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Some quick example text </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
-              <div class="card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWmc523EW0ahMBBVggFGjLmwa0yvED_H0Bb1hoiUjwQg&s"
-                  class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Some quick example text </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
-              <div class="card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWmc523EW0ahMBBVggFGjLmwa0yvED_H0Bb1hoiUjwQg&s"
-                  class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Some quick example text </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
-              <div class="card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWmc523EW0ahMBBVggFGjLmwa0yvED_H0Bb1hoiUjwQg&s"
-                  class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Some quick example text </p>
-                </div>
-              </div>
-            </div>
+            {{/each}}
           </div>
         </div>
       </div>

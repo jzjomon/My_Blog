@@ -10,6 +10,6 @@ const adminSchema = mongoose.Schema({
         required:true
     }
 })
-const admin = mongoose.model('admin',adminSchema);
+const ADMIN = mongoose.model('admin',adminSchema);
 
-module.exports = {admin};
+module.exports = ADMIN;

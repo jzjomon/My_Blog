@@ -53,3 +53,15 @@
 .td-r{
     border-right: 2px solid black;
 }
+.content-input{
+    border-radius: 10px;
+}
+.manage-users{
+    display: none;
+}
+.view{
+    display: none;
+}
+.view-option{
+    cursor: pointer;
+}

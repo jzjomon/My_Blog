@@ -15,68 +15,81 @@
 
 <body>
     <div class="container-fluid main">
+        {{!-- header bar --}}
         <div class="row header">
             <div class="col-12 fs-3 fw-bold p-3 ps-5">My Blog</div>
         </div>
+        {{!-- side bar --}}
         <div class="row d-flex section ">
             <div class="col-sm-3 col-xl-2 side-section text-white">
                 <div class="container">
                     <div class="row pt-2">
-                        <div class="col text-center p-3 manages"><a href="#"
-                                class="text-decoration-none text-white">Manage Posts</a></div>
+                        <div class="col text-center p-3 manages"><a href="#" class="text-decoration-none text-white"
+                                onclick="showPost()">Manage Posts</a></div>
                     </div>
                     <div class="row">
-                        <div class="col text-center p-3 manages"><a href="#"
-                                class="text-decoration-none text-white">Manage Users</a></div>
+                        <div class="col text-center p-3 manages"><a href="#" class="text-decoration-none text-white"
+                                onclick="showUser()">Manage Users</a></div>
                     </div>
-                    <div class="row">
-                        <div class="col text-center p-3 manages"><a href="#"
-                                class="text-decoration-none text-white">Manage Topics</a></div>
-                    </div>
+                    {{!-- <div class="row">
+                        <div class="col text-center p-3 manages"><a href="#" class="text-decoration-none text-white"
+                                onclick="showTopic()">Manage Topics</a></div>
+                    </div> --}}
                 </div>
             </div>
-            <div class="col-sm-9 col-xl-10 main-section ">
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title fw-bold" id="staticBackdropLabel">Create Blog</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="" enctype="multipart/form-data">
+            {{!-- manage section --}}
+            <div class="col-sm-9 col-xl-10 ">
+                {{!-- post adding modal --}}
+                <form action="/admin/uploadBlog" enctype="multipart/form-data" method="post">
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title fw-bold" id="staticBackdropLabel">Create Blog</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
                                     <div class="container">
                                         <div class="row text-center ">
                                             <div class="col-12">
                                                 <h3>Catogories</h3>
-                                                <select name="" id="">
-                                                    <option value="">Travel</option>
-                                                    <option value="">Technology</option>
-                                                    <option value="">Nature</option>
-                                                    <option value="">Movies</option>
-                                                    <option value="">Health</option>
-                                                    <option value="">Automobiles</option>
+                                                <select name="catogories" id="">
+                                                    <option value="">Select one</option>
+                                                    <option value="Travel">Travel</option>
+                                                    <option value="Technology">Technology</option>
+                                                    <option value="Nature">Nature</option>
+                                                    <option value="Movies">Movies</option>
+                                                    <option value="Health">Health</option>
+                                                    <option value="Automobiles">Automobiles</option>
                                                 </select>
                                             </div>
                                             <div class="col-12">
                                                 <h3>Attachments</h3>
-                                                <input type="file" multiple placeholder="Choose file" id="getImg" onchange="showImg()">
+                                                <input type="file" multiple accept="image/*" name="images"
+                                                    placeholder="Choose file" id="getImg" onchange="showImg()">
                                                 <div id="showImage"></div>
+                                            </div>
+                                            <div class="col-12">
+                                                <h3>Content</h3>
+                                                <textarea name="content" id="content" cols="30" rows="10"
+                                                    class="content-input"></textarea>
                                             </div>
                                         </div>
                                     </div>
-                                </form> 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Create</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" value="upload" class="btn btn-primary">Create</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="container-fluid">
+                </form>
+                {{!-- manage post section --}}
+                <div class="container-fluid manage-post">
                     <div class="row p-2">
                         <div class="col">
                             <button class="addpost ps-1 pe-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><a
@@ -94,50 +107,21 @@
                                     <th class="center">Title</th>
                                     <th class="lside">Action</th>
                                 </tr>
+                                {{#each posts}}
                                 <tr>
-                                    <td class="td td-r">1</td>
-                                    <td class="td td-r">31/08/22</td>
-                                    <td class="td td-r p-1">Your most unhappy customers are your greatest source of
-                                        learning. <button class="ms-3 rounded-2 ps-1 pe-1"><a href=""
-                                                class="text-decoration-none">view</a></button></td>
+                                    <td class="td td-r ps-2 slNo"></td>
+                                    <td class="td td-r ps-2">{{this.uploadedAt}}</td>
+                                    <td class="td td-r p-1 ps-2">{{this.content}}</td>
                                     <td class="td text-center">
-                                        <a href="" class="text-success text-decoration-none me-4">edit</a>
-                                        <a href="" class="text-danger text-decoration-none">delete</a>
+                                        <form action="/admin/deletePost" method="post" onsubmit="return showAlert('delete')">
+                                        <a class="text-success text-decoration-none me-4 view-option" onclick="showView()">view</a>
+                                            <button name="content" class="text-danger ps-2 pe-2 rounded-3"  value="{{this.content}}" >delete</button>
+                                        </form>
+                                        
+
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="td td-r">2</td>
-                                    <td class="td td-r">31/08/22</td>
-                                    <td class="td td-r p-1">Your most unhappy customers are your greatest source of
-                                        learning. <button class="ms-3 rounded-2 ps-1 pe-1"><a href=""
-                                                class="text-decoration-none">view</a></button></td>
-                                    <td class="td text-center">
-                                        <a href="" class="text-success text-decoration-none me-4">edit</a>
-                                        <a href="" class="text-danger text-decoration-none">delete</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td td-r">3</td>
-                                    <td class="td td-r">31/08/22</td>
-                                    <td class="td td-r p-1">Your most unhappy customers are your greatest source of
-                                        learning. <button class="ms-3 rounded-2 ps-1 pe-1"><a href=""
-                                                class="text-decoration-none">view</a></button></td>
-                                    <td class="td text-center">
-                                        <a href="" class="text-success text-decoration-none me-4">edit</a>
-                                        <a href="" class="text-danger text-decoration-none">delete</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td td-r">3</td>
-                                    <td class="td td-r">31/08/22</td>
-                                    <td class="td td-r p-1">Your most unhappy customers are your greatest source of
-                                        learning. <button class="ms-3 rounded-2 ps-1 pe-1"><a href=""
-                                                class="text-decoration-none">view</a></button></td>
-                                    <td class="td text-center">
-                                        <a href="" class="text-success text-decoration-none me-4">edit</a>
-                                        <a href="" class="text-danger text-decoration-none">delete</a>
-                                    </td>
-                                </tr>
+                                {{/each}}
                                 <tr>
                                     <td class="td-r"></td>
                                     <td class="td-r"></td>
@@ -151,6 +135,69 @@
                             </table>
                         </div>
                     </div>
+
+                </div>
+                {{!-- manage users section --}}
+                <div class="container-fluid manage-users">
+                    <div class="row p-2">
+                        <div class="col text-end">
+                            <button class="ps-2 pe-2">Search</button>
+                            <span>:</span>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center fs-3 mb-4 fw-bold">Manage Users</div>
+                        <div class="col-12">
+                            <table class="w-100 mt-2">
+                                <tr>
+                                    <th class="fside1">SN</th>
+                                    <th class="fside2">Name</th>
+                                    <th class="center">Email ID</th>
+                                    <th class="lside">Action</th>
+                                </tr>
+                                {{#each data}}
+                                <tr>
+                                    <td class="td td-r ps-2 sl"></td>
+                                    <td class="td td-r ps-2">{{this.firstName}} {{this.lastName}}</td>
+                                    <td class="td td-r p-1 ps-2">{{this.email}}</td>
+                                    <td class="td text-center">
+                                        <a class="text-danger text-decoration-none">
+                                            <form action="/admin/removeUser" method="post"
+                                                onclick="return showAlert('remove')">
+                                                <button name="email" class="text-danger ps-2 pe-2 rounded-3"
+                                                    value="{{this.email}}">Remove User</button>
+                                            </form>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                                <tr>
+                                    <td class="td-r"></td>
+                                    <td class="td-r"></td>
+                                    <td class="td-r "></td>
+                                    <td class="text-center">
+                                        <a href="" class="text-success text-decoration-none me-4"></a>
+                                        <a href="" class="text-danger text-decoration-none"></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {{!-- posts viwes pages --}}
+                <div class="container view">
+                    {{#each posts}}
+                    <div class="row mb-5 mt-2  border rounded-3 border-2 border-dark">
+                        <div class="col text-center p-2" >
+                            <img src="/assets/{{this.images.[0].filename}}" alt="" class="rounded-3 shadow-lg w-50">
+                            <h3>{{this.heading}}</h3>
+                            <p class="fs-4">{{this.content}}</p>
+                            <span>{{this.uploadedAt}}</span>
+                        </div>
+                        
+                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
