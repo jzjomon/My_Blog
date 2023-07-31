@@ -48,7 +48,7 @@ const removeUser = (req,res)=>{
     USER.deleteOne({email:req.body.email}).then(response =>{
         res.redirect('/admin/home');
     })
-}
+} 
 const removePost = (req,res)=>{
     UPLOADS.deleteOne({content:req.body.content}).then(response =>{
        res.redirect('/admin/home')

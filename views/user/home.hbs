@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse fw-bold fs-5" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link text-" aria-current="page" href="#">Home</a>
+              <a class="nav-link text-" aria-current="page" href="#Home">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-" href="/profile">Profile</a>
@@ -49,7 +49,7 @@
     src="https://img.freepik.com/free-photo/office-table-with-cup-coffee-keyboard-notepad_1220-4618.jpg?t=st=1689789620~exp=1689790220~hmac=df655aff8b239dec4039ac4c5be3832d39ac786cb42383e8a2deedb3906f9e3e"
     alt="" class="back-img" />
   {{! main sections }}
-  <section class="section">
+  <section class="section" id="Home">
     {{! main side section }}
     <div class="side-section">
       <div class="fixed-div">
@@ -75,58 +75,26 @@
       </div>
     </div>
     {{! main section }}
-    <div class="main-section">
+    <div class="main-section" >
       <div class="trending">
-        <div class="text-center fw-bold mt-2 mb-4"><i class="fa-solid fa-arrow-trend-up text-dark"></i><span
-            class="ps-2 text-dark fs-4">Trending</span></div>
-        {{! trending posts }}
+        <div class="text-center fw-bold mt-2 mb-4"><span
+            class="ps-2 text-dark fs-4">Latest</span></div>
+        {{! latest posts }}
+        {{#each latest}}
         <div class="posts">
           <div class="w-75 m-auto mt-5 text-dark post">
-            <img src="https://preview.colorlib.com/theme/magdesign/images/img_2.jpg"
+            <img src="/assets/{{this.images.[0].filename}}"
               class="d-block w-100 border border-black rounded-5" alt="post-img" />
-            <span class="d-block m-2">Business, Travel — July 2, 2020</span>
-            <span class="d-block fw-bold fs-6 m-2">Your most unhappy customers
-              are your greatest source of learning.</span>
-            <p class="text-dark m-2">Far far away, behind the word mountains,
-              far from the countries Vokalia and Consonantia, there live the
-              blind texts.</p>
-            <div class="author d-flex flex-row gap-3">
+            <span class="d-block m-2">{{this.heading}} — {{this.uploadedAt}}</span>
+            <span class="d-block fw-bold fs-6 m-2">{{this.content}}</span>
+            {{!-- <div class="author d-flex flex-row gap-3 m-2">
               <img src="https://preview.colorlib.com/theme/magdesign/images/person_1.jpg" class="author-img" alt="" />
               <div class="d-flex flex-column"><span class="fw-bold">Sergy
                   Campbell</span><span class="text-dark">CEO and Founder</span></div>
-            </div>
-          </div>
-          <div class="w-75 m-auto mt-5 text-dark post">
-            <img src="https://preview.colorlib.com/theme/magdesign/images/img_3.jpg"
-              class="d-block w-100 border border-black rounded-5" alt="post-img" />
-            <span class="d-block m-2">Business, Travel — July 2, 2020</span>
-            <span class="d-block fw-bold fs-6 m-2">Your most unhappy customers
-              are your greatest source of learning.</span>
-            <p class="text-dark m-2">Far far away, behind the word mountains,
-              far from the countries Vokalia and Consonantia, there live the
-              blind texts.</p>
-            <div class="author d-flex flex-row gap-3 m-2">
-              <img src="https://preview.colorlib.com/theme/magdesign/images/person_1.jpg" class="author-img" alt="" />
-              <div class="d-flex flex-column"><span class="fw-bold">Sergy
-                  Campbell</span><span class="text-dark">CEO and Founder</span></div>
-            </div>
-          </div>
-          <div class="w-75 m-auto mt-5 text-dark post">
-            <img src="https://preview.colorlib.com/theme/magdesign/images/img_4.jpg"
-              class="d-block w-100 border border-black rounded-5" alt="post-img" />
-            <span class="d-block m-2">Business, Travel — July 2, 2020</span>
-            <span class="d-block fw-bold fs-6 m-2">Your most unhappy customers
-              are your greatest source of learning.</span>
-            <p class="text-dark m-2">Far far away, behind the word mountains,
-              far from the countries Vokalia and Consonantia, there live the
-              blind texts.</p>
-            <div class="author d-flex flex-row gap-3 m-2">
-              <img src="https://preview.colorlib.com/theme/magdesign/images/person_1.jpg" class="author-img" alt="" />
-              <div class="d-flex flex-column"><span class="fw-bold">Sergy
-                  Campbell</span><span class="text-dark">CEO and Founder</span></div>
-            </div>
+            </div> --}}
           </div>
         </div>
+        {{/each}}
       </div>
       {{! blogs }}
       <div class="Blogs mt-3 mb-3" id="blogs">
@@ -136,7 +104,7 @@
         <div class="container">
           <div class="row d-flex justify-content-center">
             {{#each data}}
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
               <div class="card">
                 <img
                   src="/assets/{{this.images.[0].filename}}"
@@ -166,7 +134,7 @@
           <ul class="list-footer">
             <li class="p-2">Home</li>
             <li class="p-2">About</li>
-            <li class="p-2">Trending</li>
+            <li class="p-2">Latest</li>
           </ul>
         </div>
         <div class="col-xl-4 col-md-12 col-sm-12 p-3 mt-1 mb-1 text-center">
@@ -179,6 +147,7 @@
       </div>
     </div>
   </footer>
+  <script src="script/home.js"></script>
   <script src="https://kit.fontawesome.com/2cca22d63c.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

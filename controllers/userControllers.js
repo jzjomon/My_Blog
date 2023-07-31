@@ -35,10 +35,13 @@ const  dologin = (req,res)=>{
 }
 const Home = (req,res) =>{
     UPLOADS.find().then( response =>{
-        res.render('user/home',{data:response})
+        UPLOADS.find().sort({uploadedAt:-1}).limit(5).then(sorted =>{
+            res.render('user/home',{data:response,latest:sorted})
+        })
     })
 }
 const Profile = (req,res) =>{
+    
     res.render('user/profile')
 }
 module.exports = {login,signup,dosignup,dologin,Home,Profile}
