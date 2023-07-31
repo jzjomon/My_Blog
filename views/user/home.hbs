@@ -105,14 +105,16 @@
           <div class="row d-flex justify-content-center">
             {{#each data}}
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
+              <a href="/detailedView?id={{this._id}}" class="text-decoration-none">
               <div class="card">
                 <img
                   src="/assets/{{this.images.[0].filename}}"
                   class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">{{this.heading}}</p>
+                <div class="card-body bg-secondary">
+                  <p class="card-text text-white">{{this.heading}}</p>
                 </div>
               </div>
+              </a>
             </div>
             {{/each}}
           </div>

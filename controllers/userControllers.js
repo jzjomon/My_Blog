@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 const {USER} = require('../models/userModel');
 const UPLOADS = require('../models/blogModel');
+const jwt = require('jsonwebtoken');
+
 
 const login = (req,res)=>{
-    res.render('user/login')
+    if(req.cookies.userToken){
+        res.redirect('/home')
+    }else{
+        res.render('user/login')
+    }
 }
 const signup = (req,res)=>{
     res.render('user/signUp')
@@ -27,6 +33,13 @@ const dosignup = (req,res)=>{
 const  dologin = (req,res)=>{
     USER.find({email:req.body.email,password:req.body.password}).then((response)=>{
         if(response.length > 0){
+            const token = jwt.sign({userid:response[0]._id},'tokenpass',{expiresIn:'2d'});
+            res.cookie('userToken',token,{
+                httpOnly:true,
+                samSite:'lax',
+                secure:false,
+                maxAge:24*60*60*1000
+            })
             res.status(200).json({login:true})
         }else{
             res.json({login:false})
@@ -41,7 +54,23 @@ const Home = (req,res) =>{
     })
 }
 const Profile = (req,res) =>{
-    
     res.render('user/profile')
 }
-module.exports = {login,signup,dosignup,dologin,Home,Profile}
+const detailedView = (req,res) =>{
+    UPLOADS.find({_id:req.query.id}).then(response =>{
+        res.render('user/detailedView',{data:response[0]})
+    })
+}
+const logout = (req,res) =>{
+    res.cookie('userToken',null,{
+        httpOnly:true,
+        samSite:"lax",
+        secure:false,
+        maxAge:1
+    })
+    req.cookies.userToken = null;
+    res.redirect('/')
+}
+
+
+module.exports = {login,signup,dosignup,dologin,Home,Profile,detailedView,logout}
