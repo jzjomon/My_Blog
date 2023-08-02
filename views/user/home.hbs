@@ -44,14 +44,10 @@
       </div>
     </nav>
   </header>
-  {{! background image }}
-  <img
-    src="https://img.freepik.com/free-photo/office-table-with-cup-coffee-keyboard-notepad_1220-4618.jpg?t=st=1689789620~exp=1689790220~hmac=df655aff8b239dec4039ac4c5be3832d39ac786cb42383e8a2deedb3906f9e3e"
-    alt="" class="back-img" />
   {{! main sections }}
   <section class="section" id="Home">
     {{! main side section }}
-    <div class="side-section">
+    <div class="side-section ">
       <div class="fixed-div">
         <div class="brand text-center mb-4 d-flex flex-column align-items-center">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK_ZZp2CjcOyih5-OsbN5uUgLFP8DEzb-lEg&usqp=CAU"
@@ -75,16 +71,15 @@
       </div>
     </div>
     {{! main section }}
-    <div class="main-section" >
+    <div class="main-section ps-4">
       <div class="trending">
-        <div class="text-center fw-bold mt-2 mb-4"><span
-            class="ps-2 text-dark fs-4">Latest</span></div>
+        <div class="text-center fw-bold mt-2 mb-4"><span class="ps-2 text-dark fs-4">Latest</span></div>
         {{! latest posts }}
         {{#each latest}}
         <div class="posts">
           <div class="w-75 m-auto mt-5 text-dark post">
-            <img src="/assets/{{this.images.[0].filename}}"
-              class="d-block w-100 border border-black rounded-5" alt="post-img" />
+            <img src="/assets/{{this.images.[0].filename}}" class="d-block w-100 border border-black rounded-5"
+              alt="post-img" />
             <span class="d-block m-2">{{this.heading}} — {{this.uploadedAt}}</span>
             <span class="d-block fw-bold fs-6 m-2">{{this.content}}</span>
             {{!-- <div class="author d-flex flex-row gap-3 m-2">
@@ -101,19 +96,17 @@
         <div class="text-center">
           <span class="fw-bold fs-4">Blogs</span>
         </div>
-        <div class="container">
-          <div class="row d-flex justify-content-center">
+        <div class="container w-75">
+          <div class="row d-flex">
             {{#each data}}
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
+            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
               <a href="/detailedView?id={{this._id}}" class="text-decoration-none">
-              <div class="card">
-                <img
-                  src="/assets/{{this.images.[0].filename}}"
-                  class="card-img-top" alt="..." />
-                <div class="card-body bg-secondary">
-                  <p class="card-text text-white">{{this.heading}}</p>
+                <div class="card">
+                  <img src="/assets/{{this.images.[0].filename}}" class="card-img-top blog-img" alt="..." />
+                  <div class="card-body bg-secondary">
+                    <p class="card-text text-white">{{this.heading}}</p>
+                  </div>
                 </div>
-              </div>
               </a>
             </div>
             {{/each}}
@@ -153,6 +146,12 @@
   <script src="https://kit.fontawesome.com/2cca22d63c.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
     crossorigin="anonymous"></script>
 </body>
 

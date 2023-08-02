@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {getUserData} = require('../helpers/helper');
+const {getUserData} = require('../helpers/userHelper');
 
 const userAuth = (req,res,next) =>{
     if(req?.cookies?.userToken){

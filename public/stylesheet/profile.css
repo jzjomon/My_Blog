@@ -1,10 +1,3 @@
-.main-container{
-    background-image: url("https://img.freepik.com/free-photo/office-table-with-cup-coffee-keyboard-notepad_1220-4618.jpg?t=st=1689789620~exp=1689790220~hmac=df655aff8b239dec4039ac4c5be3832d39ac786cb42383e8a2deedb3906f9e3e");
-    height:100vh ;
-    width: 100vw;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 .main{
     height: 600px;
     border-color: rgb(48, 51, 50);

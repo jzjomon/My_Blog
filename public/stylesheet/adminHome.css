@@ -11,7 +11,9 @@
     background-color: rgb(211, 211, 211);
     border-style: double;
     border-color: rgb(79, 79, 79);
-    height: 10%;
+    min-height: 10%;
+    position: sticky;
+    top:0;
 }
 .section{
     height: 90%;
@@ -20,6 +22,10 @@
     background-color: rgb(76, 76, 76);
     border-style: double;
     border-color: rgb(0, 0, 0);
+}
+.manage{
+    position: sticky;
+    top: 11%;
 }
 .manages{
     border-bottom: 2px solid white;

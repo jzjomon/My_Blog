@@ -7,7 +7,7 @@
     background-color: rgb(211, 211, 211);
     border-style: double;
     border-color: rgb(79, 79, 79);
-    position:sticky;
+    position: sticky;
     top: 0;
     z-index: 1;
 }

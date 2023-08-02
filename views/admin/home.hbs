@@ -17,12 +17,18 @@
     <div class="container-fluid main">
         {{!-- header bar --}}
         <div class="row header">
-            <div class="col-12 fs-3 fw-bold p-3 ps-5">My Blog</div>
+            <div class="col-12 p-3 ps-5 d-flex  justify-content-between">
+                <span class="fs-3 fw-bold">My Blog</span>
+                <span class="fs-5 pe-2">
+                    <span>{{adminDetails.name}}</span>
+                    <button class="rounded-3 ps-2 pe-2 " onclick="signout()">Sign Out</button>
+                </span>
+            </div>
         </div>
         {{!-- side bar --}}
         <div class="row d-flex section ">
             <div class="col-sm-3 col-xl-2 side-section text-white">
-                <div class="container">
+                <div class="container manage">
                     <div class="row pt-2">
                         <div class="col text-center p-3 manages"><a href="#" class="text-decoration-none text-white"
                                 onclick="showPost()">Manage Posts</a></div>
@@ -104,7 +110,7 @@
                                 <tr>
                                     <th class="fside1">SN</th>
                                     <th class="fside2">Date</th>
-                                    <th class="center">Title</th>
+                                    <th class="center">Content</th>
                                     <th class="lside">Action</th>
                                 </tr>
                                 {{#each posts}}
@@ -113,12 +119,13 @@
                                     <td class="td td-r ps-2">{{this.uploadedAt}}</td>
                                     <td class="td td-r p-1 ps-2">{{this.content}}</td>
                                     <td class="td text-center">
-                                        <form action="/admin/deletePost" method="post" onsubmit="return showAlert('delete')">
-                                        <a class="text-success text-decoration-none me-4 view-option" onclick="showView()">view</a>
-                                            <button name="content" class="text-danger ps-2 pe-2 rounded-3"  value="{{this.content}}" >delete</button>
+                                        <form action="/admin/deletePost" method="post"
+                                            onsubmit="return showAlert('delete')">
+                                            <a class="text-success text-decoration-none me-4 view-option"
+                                                href="/admin/viewPage?id={{this._id}}">view</a>
+                                            <button name="content" class="text-danger ps-2 pe-2 rounded-3"
+                                                value="{{this.content}}">delete</button>
                                         </form>
-                                        
-
                                     </td>
                                 </tr>
                                 {{/each}}
@@ -165,7 +172,7 @@
                                         <a class="text-danger text-decoration-none">
                                             <form action="/admin/removeUser" method="post"
                                                 onclick="return showAlert('remove')">
-                                                <button name="email" class="text-danger ps-2 pe-2 rounded-3"
+                                                <button name="email" class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3"
                                                     value="{{this.email}}">Remove User</button>
                                             </form>
                                         </a>
@@ -184,20 +191,6 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                {{!-- posts viwes pages --}}
-                <div class="container view">
-                    {{#each posts}}
-                    <div class="row mb-5 mt-2  border rounded-3 border-2 border-dark">
-                        <div class="col text-center p-2" >
-                            <img src="/assets/{{this.images.[0].filename}}" alt="" class="rounded-3 shadow-lg w-50">
-                            <h3>{{this.heading}}</h3>
-                            <p class="fs-4">{{this.content}}</p>
-                            <span>{{this.uploadedAt}}</span>
-                        </div>
-                        
-                    </div>
-                    {{/each}}
                 </div>
             </div>
         </div>

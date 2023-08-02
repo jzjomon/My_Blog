@@ -4,10 +4,6 @@
 }
 .container-fluid{
     min-height: 100vh;
-    background-image: url(https://img.freepik.com/free-photo/office-table-with-cup-coffee-keyboard-notepad_1220-4618.jpg?t=st=1689789620~exp=1689790220~hmac=df655aff8b239dec4039ac4c5be3832d39ac786cb42383e8a2deedb3906f9e3e );
-    background-repeat: no-repeat;
-    background-size: 100vw 100vh;
-    background-attachment: fixed;
 }
 .main{
     min-height: 600px;

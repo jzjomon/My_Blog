@@ -13,23 +13,16 @@ const showImg = () => {
 
 let managePost = document.querySelector('.manage-post');
 let manageUser = document.querySelector('.manage-users');
-let view = document.querySelector('.view');
 
 const showPost = () => {
     manageUser.style.display = 'none';
     managePost.style.display = 'block';
-    view.style.display = 'none';
 }
 const showUser = () => {
     managePost.style.display = 'none'
     manageUser.style.display = 'block'
-    view.style.display = 'none'
 }
-const showView = () =>{
-    managePost.style.display = 'none'
-    manageUser.style.display = 'none'
-    view.style.display = 'block'
-}
+
 
 const slNo = document.querySelectorAll('.slNo');
 const sl = document.querySelectorAll('.sl');
@@ -61,4 +54,9 @@ const showAlert = (res) => {
             return false
         }
     }
+}
+const signout = () =>{
+    localStorage.clear();
+    sessionStorage.clear();
+    location.assign('/admin/signout')
 }
