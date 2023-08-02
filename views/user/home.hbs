@@ -36,7 +36,7 @@
           <div class="user">
             <span class="fs-5 pe-2">{{userDetails.firstName}} {{userDetails.lastName}}</span>
             <span>
-              <button class="rounded-3 ps-2 pe-2 fs-6 "  onclick="logout()">Log out</button>
+              <button class="rounded-3 ps-2 pe-2 fs-6 " onclick="logout()">Log out</button>
             </span>
           </div>
         </div>
@@ -44,7 +44,7 @@
     </nav>
   </header>
   {{! main sections }}
-  <section class="section" id="Home">
+  <section class="section gap-2" id="Home">
     {{! main side section }}
     <div class="side-section ">
       <div class="fixed-div">
@@ -60,11 +60,9 @@
         </div>
         <div class="options text-center">
           <ul>
-            <li class="list-unstyled"><button class="btn text-dark border mb-3 mt-5">Travel</button></li>
-            <li class="list-unstyled"><button class="btn text-dark border mb-3">Technology</button></li>
-            <li class="list-unstyled"><button class="btn text-dark border mb-3">Nature</button></li>
-            <li class="list-unstyled"><button class="btn text-dark border mb-3">Health</button></li>
-            <li class="list-unstyled"><button class="btn text-dark border mb-3">Automobile</button></li>
+            <li class="list-unstyled"><button class="btn text-dark border mb-4 mt-5">Travel</button></li>
+            <li class="list-unstyled"><button class="btn text-dark border mb-4">Nature</button></li>
+            <li class="list-unstyled"><button class="btn text-dark border mb-4">Health</button></li>
           </ul>
         </div>
       </div>
@@ -110,7 +108,12 @@
             </div>
             {{/each}}
           </div>
+          <div class="pagination d-flex justify-content-between">
+            <i class="fa-solid fa-angle-left"></i>
+            <i class="fa-solid fa-angle-right"></i>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
