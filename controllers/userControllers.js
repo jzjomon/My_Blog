@@ -69,6 +69,8 @@ const Home = (req, res) => {
         UPLOADS.find().then(response => {
             UPLOADS.find().sort({ uploadedAt: -1 }).limit(5).then(sorted => {
                 res.render('user/home', { data: response, latest: sorted })
+            }).catch(err =>{
+                res.render('user/404')
             })
         })
     } catch (err) {
@@ -87,6 +89,8 @@ const detailedView = (req, res) => {
     try {
         UPLOADS.find({ _id: req.query.id }).then(response => {
             res.render('user/detailedView', { data: response[0] })
+        }).catch(err =>{
+            res.render('user/404')
         })
     } catch (err) {
         res.render('user/404')
@@ -139,6 +143,8 @@ const update = (req, res) => {
                 image: userdata.image
             }).then(response => {
                 res.redirect('/profile')
+            }).catch(err =>{
+                res.render('user/404')
             })
         })
     } catch (err) {

@@ -55,6 +55,26 @@ const showAlert = (res) => {
         }
     }
 }
+const deletePost = (id) =>{
+    const cofirmation = confirm('do you want to delete this post?');
+    if(cofirmation){
+        fetch('/admin/deletePost',{
+            method:"delete",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({postId:id})
+        }).then(response => response.json())
+        .then(res =>{
+            if(res.delete){
+                window.location.reload()
+            }else{
+                alert('something went wrong')
+            }
+        })
+    }
+}
+
 const signout = () =>{
     localStorage.clear();
     sessionStorage.clear();

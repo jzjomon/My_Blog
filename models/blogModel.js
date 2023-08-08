@@ -5,6 +5,10 @@ const blogShema = mongoose.Schema({
         type:String,
         required:true
     },
+    catogory:{
+        type:String,
+        required:true
+    },
     uploadedAt:{
         type:Date,
         default:new Date()

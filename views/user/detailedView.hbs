@@ -39,9 +39,10 @@
         <div class="container-fluid">
             <div class="row ">
                 {{!-- carousel --}}
-                <div class="col-xl-8 col-sm-12 p-3">
+                <div class="col-xl-6 col-sm-12 p-3">
+                    <h3 class="text-center border border-dark rounded">{{data.heading}}</h3>
                     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
+                        <div class="carousel-indicators ">
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                                 class="active" aria-current="true" aria-label="Slide 1"></button>
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
@@ -51,18 +52,18 @@
                         </div>
                         <div class="carousel-inner">
                             {{#if data.images.[0].filename}}
-                            <div class="carousel-item active">
-                                <img src="assets/{{data.images.[0].filename}}" class="d-block w-100 rounded-2" alt="...">
+                            <div class="carousel-item active  " data-bs-interval="2000">
+                                <img src="/assets/{{data.images.[0].filename}}" class="d-block  rounded-2 w-100" alt="...">
                             </div>
                             {{/if}}
                             {{#if data.images.[1].filename}}
-                            <div class="carousel-item active">
-                                <img src="assets/{{data.images.[1].filename}}" class="d-block w-100 rounded-2" alt="...">
+                            <div class="carousel-item active  " data-bs-interval="2000">
+                                <img src="/assets/{{data.images.[1].filename}}" class="d-block  rounded-2 w-100" alt="...">
                             </div>
                             {{/if}}
                             {{#if data.images.[2].filename}}
-                            <div class="carousel-item active">
-                                <img src="assets/{{data.images.[2].filename}}" class="d-block w-100 rounded-2" alt="...">
+                            <div class="carousel-item active  " data-bs-interval="2000">
+                                <img src="/assets/{{data.images.[2].filename}}" class="d-block  rounded-2 w-100" alt="...">
                             </div>
                             {{/if}}
                         </div>
@@ -79,9 +80,9 @@
                     </div>
                 </div>
                 {{!-- contents --}}
-                <div class="col-xl-4 col-sm-12 p-3 text-center">
-                    <h3>{{data.heading}}</h3>
-                    <p>{{data.content}}
+                <div class="col-xl-6 col-sm-12 p-3 text-center">
+                    <h5 class="border border-dark rounded pt-2 pb-2">{{data.catogory}}</h5>
+                    <p  class="h-75 rounded border border-dark ">{{data.content}}
                         
                     </p>
                 </div>

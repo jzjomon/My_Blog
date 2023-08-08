@@ -3,7 +3,9 @@ const multer = require('multer');
 const ADMIN = require('../models/adminModel');
 const UPLOADS = require('../models/blogModel');
 const { USER } = require('../models/userModel');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const fs = require('fs')
+const path = require('path')
 
 const login = (req, res) => {
     try {
@@ -41,6 +43,8 @@ const home = (req, res) => {
         USER.find().then(response => {
             UPLOADS.find().then(posts => {
                 res.render('admin/home', { data: response, posts: posts });
+            }).catch(err =>{
+                res.render('admin/404')
             })
         })
     } catch (err) {
@@ -60,14 +64,17 @@ const uploadBlog = (req, res) => {
         const upload = multer({ storage: fileStorage }).array('images', 3)
         upload(req, res, (err) => {
             UPLOADS({
-                heading: req.body.catogories,
+                heading: req.body.heading,
+                catogory:req.body.catogories,
                 content: req.body.content,
                 images: req.files
             }).save().then((response) => {
                 res.redirect('/admin/home');
+            }).catch(err =>{
+                res.render('admin/404')
             })
         })
-    } catch (err) {
+    }catch (err) {
         res.render('admin/404')
     }
 }
@@ -80,19 +87,31 @@ const removeUser = (req, res) => {
         res.render('admin/404')
     }
 }
-const removePost = (req, res) => {
+const removePost = ( req, res) => {
     try {
-        UPLOADS.deleteOne({ content: req.body.content }).then(response => {
-            res.redirect('/admin/home')
+        UPLOADS.findOne({_id:req.body.postId}).then(selectedPost =>{
+            UPLOADS.deleteOne({_id:req.body.postId}).then(response => {   
+              for(x of selectedPost.images){
+                const filePath = path.join(__dirname,'..','public/assets',x.filename)
+                fs.unlink(filePath, err =>{
+                    if(err){
+                        res.json({delete:false})
+                    }else{
+                        res.json({delete:true})
+                    }
+                })
+              } 
+            })
         })
-    } catch (err) {
+        
+    } catch (err) { 
         res.render('admin/404')
     }
 }
 const viewPage = (req, res) => {
     try {
-        UPLOADS.find({ _id: req.query.id }).then(response => {
-            res.render('admin/view', { data: response[0] })
+        UPLOADS.findOne({ _id: req.query.id }).then(response => {
+            res.render('admin/view', { data: response})
         })
     } catch (err) {
         res.render('admin/404')

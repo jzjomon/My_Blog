@@ -10,7 +10,7 @@ router.post('/dologin',dologin)
 router.get('/home',userAuth,Home)
 router.get('/profile',userAuth,Profile)
 router.get('/detailedView',userAuth,detailedView)
-router.get('/logout',logout)
-router.post('/update',update)
+router.get('/logout',userAuth,logout)
+router.post('/update',userAuth,update)
 
 module.exports=router;

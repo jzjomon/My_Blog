@@ -37,11 +37,10 @@
             </li>
           </ul>
           <div class="user d-flex">
-            <span class="fs-5 pe-2">{{userDetails.firstName}} {{userDetails.lastName}}</span>
-             <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
           </div>
         </div>
       </div>
@@ -105,7 +104,7 @@
                 <div class="card">
                   <img src="/assets/{{this.images.[0].filename}}" class="card-img-top blog-img" alt="..." />
                   <div class="card-body bg-secondary">
-                    <p class="card-text text-white">{{this.heading}}</p>
+                    <p class="card-text text-white">{{this.catogory}}</p>
                   </div>
                 </div>
               </a>

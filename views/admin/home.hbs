@@ -78,6 +78,10 @@
                                                 <div id="showImage"></div>
                                             </div>
                                             <div class="col-12">
+                                                <h3>Heading</h3>
+                                                <input type="text" name="heading">
+                                            </div>
+                                            <div class="col-12">
                                                 <h3>Content</h3>
                                                 <textarea name="content" id="content" cols="30" rows="10"
                                                     class="content-input"></textarea>
@@ -119,13 +123,10 @@
                                     <td class="td td-r ps-2">{{this.uploadedAt}}</td>
                                     <td class="td td-r p-1 ps-2 ">{{this.content}}</td>
                                     <td class="td text-center">
-                                        <form action="/admin/deletePost" method="post"
-                                            onsubmit="return showAlert('delete')">
-                                            <a class="text-success text-decoration-none me-4 view-option"
-                                                href="/admin/viewPage?id={{this._id}}">view</a>
-                                            <button name="content" class="text-danger ps-2 pe-2 rounded-3"
-                                                value="{{this.content}}">delete</button>
-                                        </form>
+                                        <a class="text-success text-decoration-none me-4 view-option"
+                                            href="/admin/viewPage?id={{this._id}}">view</a>
+                                        <button id="delete" class="text-danger ps-2 pe-2 rounded-3"
+                                            onclick="deletePost('{{this._id}}')">delete</button>
                                     </td>
                                 </tr>
                                 {{/each}}
