@@ -14,7 +14,7 @@ const showImg = () => {
 let managePost = document.querySelector('.manage-post');
 let manageUser = document.querySelector('.manage-users');
 
-const showPost = () => {
+const showPost = () => { 
     manageUser.style.display = 'none';
     managePost.style.display = 'block';
 }
@@ -60,3 +60,4 @@ const signout = () =>{
     sessionStorage.clear();
     location.assign('/admin/signout')
 }
+

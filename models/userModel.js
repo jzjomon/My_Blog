@@ -17,6 +17,13 @@ const userSchema = mongoose.Schema({
         type:String,
         required:true
     },
+    work:{
+        type:String
+    },
+    place:{
+        type:String
+    },
+    image:[]
 })
 const USER = mongoose.model('users',userSchema);
 

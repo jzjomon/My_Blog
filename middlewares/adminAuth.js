@@ -3,7 +3,7 @@ const getAdminData = require('../helpers/adminHelper')
 
 const adminAuth = (req, res, next) => {
     if(req.cookies.adminToken){
-        const logingVerify = jwt.verify(req.cookies.adminToken,'tokenpass');
+        const logingVerify = jwt.verify(req.cookies.adminToken,process.env.JWT_PASS);
         if(logingVerify){
             const adminid = parseJwt(req.cookies.adminToken)
             getAdminData(adminid.id).then(response => {

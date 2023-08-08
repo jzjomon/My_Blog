@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.full-width{
+    height: 100vh;
+    background-color: rgb(211, 211, 211);
+}
+.hmm{
+    font-size: 60px;
+}
+.rocket{
+    animation: hide 5s  ;
+    animation-iteration-count: infinite;
+}
+@keyframes hide{
+    0%{
+        transform:translateX(0px)scale(1)
+    }
+    100%{
+        transform:translateX(500px)scale(0)
+    }
+}
+.btn-option{
+    background-color: rgb(211, 211, 211);
+    transition: 0.5s;
+}
+.btn-option:hover{
+    box-shadow: 1px 1px 10px black;
+}

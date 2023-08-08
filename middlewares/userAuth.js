@@ -3,7 +3,7 @@ const {getUserData} = require('../helpers/userHelper');
 
 const userAuth = (req,res,next) =>{
     if(req?.cookies?.userToken){
-        const isLoggedin = jwt.verify(req.cookies.userToken,'tokenpass');
+        const isLoggedin = jwt.verify(req.cookies.userToken,process.env.JWT_PASS);
         if(isLoggedin){
            const userData = parseJwt(req.cookies.userToken);
             getUserData(userData.userid).then(response =>{
