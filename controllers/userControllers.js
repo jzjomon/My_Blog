@@ -3,6 +3,8 @@ const { USER } = require('../models/userModel');
 const UPLOADS = require('../models/blogModel');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
 
 const login = (req, res) => {
@@ -133,6 +135,12 @@ const update = (req, res) => {
                 userdata.place = req.body.place;
             } else if (req.files != "") {
                 userdata.image = req.files;
+                const filePath = path.join(__dirname,'..','public/assets',req.query.id);
+                fs.unlink(filePath, err =>{ 
+                    if(err){
+                        throw err
+                    }
+                })
             }
             const parsedCookie = parseJwt(req.cookies.userToken)
             USER.findOneAndUpdate({ _id: parsedCookie.userid }, {

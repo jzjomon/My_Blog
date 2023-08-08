@@ -3,11 +3,16 @@ const showImg = () => {
     const showImage = document.querySelector('#showImage');
     document.querySelector('#showImage').innerHTML = null;
     const selectedImg = img.files;
-    for (x of selectedImg) {
-        const image = document.createElement('img')
-        image.style.cssText = `width:150px; margin:3px;`
-        image.src = URL.createObjectURL(x)
-        showImage.appendChild(image);
+    if(selectedImg.length > 3){
+        showImage.innerHTML = 'maximum 3 images !'
+        showImage.style.color = 'red'
+    }else{
+        for (x of selectedImg) {
+            const image = document.createElement('img')
+            image.style.cssText = `width:150px; margin:3px;`
+            image.src = URL.createObjectURL(x)
+            showImage.appendChild(image);
+        }
     }
 }
 
