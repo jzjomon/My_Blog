@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const parseJwt = require('../helpers/jwtParser');
+const convertISO = require('../helpers/dateConverter')
 
 
 const login = (req, res) => {
@@ -48,9 +50,9 @@ const dosignup = (req, res) => {
 }
 const dologin = (req, res) => {
     try {
-        USER.find({ email: req.body.email, password: req.body.password }).then((response) => {
+        USER.findOne({ email: req.body.email, password: req.body.password }).then((response) => {
             if (response.length > 0) {
-                const token = jwt.sign({ userid: response[0]._id }, process.env.JWT_PASS, { expiresIn: '2d' });
+                const token = jwt.sign({ userid: response._id }, process.env.JWT_PASS, { expiresIn: '2d' });
                 res.cookie('userToken', token, {
                     httpOnly: true,
                     samSite: 'lax',
@@ -70,6 +72,9 @@ const Home = (req, res) => {
     try {
         UPLOADS.find().then(response => {
             UPLOADS.find().sort({ uploadedAt: -1 }).limit(5).then(sorted => {
+                for(x of sorted){
+                    x.date = convertISO(x.uploadedAt)
+                }
                 res.render('user/home', { data: response, latest: sorted })
             }).catch(err =>{
                 res.render('user/404')
@@ -89,8 +94,8 @@ const Profile = (req, res) => {
 }
 const detailedView = (req, res) => {
     try {
-        UPLOADS.find({ _id: req.query.id }).then(response => {
-            res.render('user/detailedView', { data: response[0] })
+        UPLOADS.findOne({ _id: req.query.id }).then(response => {
+            res.render('user/detailedView', { data: response })
         }).catch(err =>{
             res.render('user/404')
         })
@@ -158,15 +163,6 @@ const update = (req, res) => {
     } catch (err) {
         res.render('user/404')
     }
-}
-function parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-
-    return JSON.parse(jsonPayload);
 }
 
 

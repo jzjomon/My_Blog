@@ -84,5 +84,4 @@ const signout = () =>{
     localStorage.clear();
     sessionStorage.clear();
     location.assign('/admin/signout')
-}
-
+} 

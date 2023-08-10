@@ -14,6 +14,7 @@
     min-height: 10%;
     position: sticky;
     top:0;
+    z-index: 1;
 }
 .section{
     height: 90%;
@@ -55,6 +56,7 @@
 }
 .td{
     border-bottom: 2px solid black;
+    height: 100px;
 }
 .td-r{
     border-right: 2px solid black;
@@ -70,4 +72,8 @@
 }
 .view-option{
     cursor: pointer;
+}
+#content{
+    max-height: 90px;
+    overflow: hidden;
 }

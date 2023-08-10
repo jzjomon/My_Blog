@@ -5,7 +5,7 @@ const path = require('path');
 const user = require('./routes/user');
 const admin = require('./routes/admin');
 const connectDB = require('./config/dbConfig');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 
 app.set('view engine','hbs');
 app.set('views',path.join(__dirname,'views'));

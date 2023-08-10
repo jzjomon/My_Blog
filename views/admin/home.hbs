@@ -120,8 +120,8 @@
                                 {{#each posts}}
                                 <tr>
                                     <td class="td td-r ps-2 slNo"></td>
-                                    <td class="td td-r ps-2">{{this.uploadedAt}}</td>
-                                    <td class="td td-r p-1 ps-2 ">{{this.content}}</td>
+                                    <td class="td td-r ps-2">{{this.date}}</td>
+                                    <td class="td td-r p-1 ps-2"><p id="content">{{this.content}}</p></td>
                                     <td class="td text-center">
                                         <a class="text-success text-decoration-none me-4 view-option"
                                             href="/admin/viewPage?id={{this._id}}">view</a>
@@ -129,7 +129,7 @@
                                             onclick="deletePost('{{this._id}}')">delete</button>
                                     </td>
                                 </tr>
-                                {{/each}}
+                                {{/each}} 
                                 <tr>
                                     <td class="td-r"></td>
                                     <td class="td-r"></td>

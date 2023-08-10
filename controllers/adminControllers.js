@@ -6,6 +6,7 @@ const { USER } = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const fs = require('fs')
 const path = require('path')
+const convertISO = require('../helpers/dateConverter')
 
 const login = (req, res) => {
     try {
@@ -20,9 +21,9 @@ const login = (req, res) => {
 }
 const doLogin = (req, res) => {
     try {
-        ADMIN.find({ email: req.body.email, password: req.body.password }).then((response) => {
+        ADMIN.findOne({ email: req.body.email, password: req.body.password }).then((response) => {
             if (response.length > 0) {
-                const token = jwt.sign({ id: response[0]._id }, process.env.JWT_PASS, { expiresIn: "2d" });
+                const token = jwt.sign({ id: response._id }, process.env.JWT_PASS, { expiresIn: "2d" });
                 res.cookie("adminToken", token, {
                     httpOnly: true,
                     samSite: 'lax',
@@ -42,12 +43,13 @@ const home = (req, res) => {
     try {
         USER.find().then(response => {
             UPLOADS.find().then(posts => {
-                res.render('admin/home', { data: response, posts: posts });
-            }).catch(err =>{
-                res.render('admin/404')
+                for(x of posts){
+                    x.date = convertISO(x.uploadedAt)
+                }
+                res.render('admin/home', { data: response, posts: posts});
             })
         })
-    } catch (err) {
+    } catch (err) { 
         res.render('admin/404')
     }
 }
@@ -102,7 +104,7 @@ const removePost = ( req, res) => {
                 })
               } 
             })
-        })
+        }) 
         
     } catch (err) { 
         res.render('admin/404')
@@ -130,6 +132,5 @@ const signout = (req, res) => {
         res.status(404).render('admin/404')
     }
 }
-
 
 module.exports = { login, doLogin, home, uploadBlog, removeUser, removePost, viewPage, signout };

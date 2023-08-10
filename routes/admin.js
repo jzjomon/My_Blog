@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {login,doLogin,home,uploadBlog,removeUser,removePost,viewPage,signout} = require('../controllers/adminControllers')
 const adminAuth = require('../middlewares/adminAuth')
+
 router.get('/',login)
 router.post('/doLogin',doLogin)
 router.get('/home',adminAuth,home)
