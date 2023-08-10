@@ -51,7 +51,7 @@ const dosignup = (req, res) => {
 const dologin = (req, res) => {
     try {
         USER.findOne({ email: req.body.email, password: req.body.password }).then((response) => {
-            if (response.length > 0) {
+            if (response) {
                 const token = jwt.sign({ userid: response._id }, process.env.JWT_PASS, { expiresIn: '2d' });
                 res.cookie('userToken', token, {
                     httpOnly: true,

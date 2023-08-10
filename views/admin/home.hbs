@@ -73,8 +73,8 @@
                                             </div>
                                             <div class="col-12">
                                                 <h3>Attachments</h3>
-                                                <input type="file" multiple accept="image/*" name="images"
-                                                     id="getImg" onchange="showImg()">
+                                                <input type="file" multiple accept="image/*" name="images" id="getImg"
+                                                    onchange="showImg()">
                                                 <div id="showImage"></div>
                                             </div>
                                             <div class="col-12">
@@ -121,7 +121,9 @@
                                 <tr>
                                     <td class="td td-r ps-2 slNo"></td>
                                     <td class="td td-r ps-2">{{this.date}}</td>
-                                    <td class="td td-r p-1 ps-2"><p id="content">{{this.content}}</p></td>
+                                    <td class="td td-r p-1 ps-2">
+                                        <p id="content">{{this.content}}</p>
+                                    </td>
                                     <td class="td text-center">
                                         <a class="text-success text-decoration-none me-4 view-option"
                                             href="/admin/viewPage?id={{this._id}}">view</a>
@@ -129,7 +131,7 @@
                                             onclick="deletePost('{{this._id}}')">delete</button>
                                     </td>
                                 </tr>
-                                {{/each}} 
+                                {{/each}}
                                 <tr>
                                     <td class="td-r"></td>
                                     <td class="td-r"></td>
@@ -171,11 +173,8 @@
                                     <td class="td td-r p-1 ps-2">{{this.email}}</td>
                                     <td class="td text-center">
                                         <a class="text-danger text-decoration-none">
-                                            <form action="/admin/removeUser" method="post"
-                                                onclick="return showAlert('remove')">
-                                                <button name="email" class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3"
-                                                    value="{{this.email}}">Remove User</button>
-                                            </form>
+                                            <button name="email" class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3"
+                                             onclick="blockUser('{{this._id}}')">Block User</button>
                                         </a>
                                     </td>
                                 </tr>

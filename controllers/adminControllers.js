@@ -22,7 +22,7 @@ const login = (req, res) => {
 const doLogin = (req, res) => {
     try {
         ADMIN.findOne({ email: req.body.email, password: req.body.password }).then((response) => {
-            if (response.length > 0) {
+            if (response) {
                 const token = jwt.sign({ id: response._id }, process.env.JWT_PASS, { expiresIn: "2d" });
                 res.cookie("adminToken", token, {
                     httpOnly: true,
@@ -80,10 +80,10 @@ const uploadBlog = (req, res) => {
         res.render('admin/404')
     }
 }
-const removeUser = (req, res) => {
-    try {
-        USER.deleteOne({ email: req.body.email }).then(response => {
-            res.redirect('/admin/home/');
+const blockUser = (req, res) => {
+    try { 
+        USER.findOne({ _id: req.body.id },{password:0}).then(response => {
+            
         })
     } catch (err) {
         res.render('admin/404')
@@ -133,4 +133,4 @@ const signout = (req, res) => {
     }
 }
 
-module.exports = { login, doLogin, home, uploadBlog, removeUser, removePost, viewPage, signout };
+module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout };

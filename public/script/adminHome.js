@@ -42,24 +42,6 @@ for (x of slNo) {
     j++
 }
 
-
-const showAlert = (res) => {
-    if (res == 'delete') {
-        let result = confirm('are you sure about delete this post');
-        if (result == true) {
-            return true
-        } else {
-            return false
-        }
-    }else if(res == 'remove'){
-        let result = confirm('are you sure about removing this user');
-        if(result == true){
-            return true
-        }else{
-            return false
-        }
-    }
-}
 const deletePost = (id) =>{
     const cofirmation = confirm('do you want to delete this post?');
     if(cofirmation){
@@ -76,6 +58,21 @@ const deletePost = (id) =>{
             }else{
                 alert('something went wrong')
             }
+        })
+    }
+}
+const blockUser = (id) => {
+    const alert = confirm('do you want to block this user');
+    if(alert){
+        fetch('/admin/blockUser',{
+            method:'post',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({id:id})
+        }).then(res => res.json())
+        .then(res =>{
+            console.log(res);
         })
     }
 }
