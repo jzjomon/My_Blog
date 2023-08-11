@@ -34,7 +34,9 @@ const addPost = (data) =>{
     }).then(res => res.json())
     .then(res => {
         if(res.creator){
-            alert('you are a creator')
+            const addPost = document.querySelector('.addPost')
+            addPost.setAttribute("data-bs-toggle","modal");
+            addPost.setAttribute("data-bs-target","#staticBackdrop2");
         }else{
             const result = confirm('You are not a content creator. click "OK" to request to admin')
             if(result){
