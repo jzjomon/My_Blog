@@ -9,7 +9,7 @@ const adminAuth = (req, res, next) => {
             if (logingVerify) {
                 const adminid = parseJwt(req.cookies.adminToken)
                 getAdminData(adminid.id).then(response => {
-                    res.locals.adminDetails = response[0]
+                    res.locals.adminDetails = response;
                     next()
                 })
             } else {

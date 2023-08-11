@@ -9,8 +9,19 @@ const userAuth = (req, res, next) => {
             if (isLoggedin) {
                 const userData = parseJwt(req.cookies.userToken);
                 getUserData(userData.userid).then(response => {
-                    res.locals.userDetails = response[0];
+                    if(response.status){
+                        res.locals.userDetails = response;
                     next()
+                    }else{
+                        res.cookie('userToken', null, {
+                            httpOnly: true,
+                            samSite: 'lax',
+                            secure: false,
+                            maxAge: 1
+                        })
+                        req.cookies.userToken = null;
+                        res.redirect('/')
+                    }
                 })
             } else {
                 res.cookie('userToken', null, {
@@ -26,7 +37,7 @@ const userAuth = (req, res, next) => {
             res.redirect('/')
         }
     } catch (err) {
-        res.render('admin/404')
+        res.render('user/404')
     }
 }
 

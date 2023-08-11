@@ -20,6 +20,10 @@ const userSchema = mongoose.Schema({
     work:{
         type:String
     },
+    status:{
+        type:Boolean,
+        default:true
+    },
     place:{
         type:String
     },

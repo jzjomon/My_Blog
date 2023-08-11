@@ -172,10 +172,18 @@
                                     <td class="td td-r ps-2">{{this.firstName}} {{this.lastName}}</td>
                                     <td class="td td-r p-1 ps-2">{{this.email}}</td>
                                     <td class="td text-center">
-                                        <a class="text-danger text-decoration-none">
-                                            <button name="email" class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3"
-                                             onclick="blockUser('{{this._id}}')">Block User</button>
+                                        {{#if this.status}}
+                                        <a href="/admin/blockUser?id={{this._id}}">
+                                        <button class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block">Block
+                                            User</button>
                                         </a>
+                                        {{else}}
+                                        <a href="/admin/unblockUser?id={{this._id}}">
+                                            <button class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block">
+                                                Unblock User
+                                            </button>
+                                        </a>
+                                        {{/if}}
                                     </td>
                                 </tr>
                                 {{/each}}

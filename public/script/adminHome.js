@@ -61,21 +61,6 @@ const deletePost = (id) =>{
         })
     }
 }
-const blockUser = (id) => {
-    const alert = confirm('do you want to block this user');
-    if(alert){
-        fetch('/admin/blockUser',{
-            method:'post',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({id:id})
-        }).then(res => res.json())
-        .then(res =>{
-            console.log(res);
-        })
-    }
-}
 
 const signout = () =>{
     localStorage.clear();

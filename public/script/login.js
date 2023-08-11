@@ -35,9 +35,11 @@ function validateAll() {
             body: JSON.stringify(formdata)
         }).then((res) => res.json())
             .then((res) => {
-                if (res.login) {
+                if(res.login == 'blocked'){
+                    alert('you have been blocked by the admin')
+                }else if(res.login == true) {
                     window.location.href = '/home'
-                } else {
+                }else {
                     document.querySelector('#warningPassword').innerHTML = "invalid credentials";
                     document.querySelector('#warningPassword').style.color = "red";
                     document.querySelector('#warningEmail').innerHTML = "invalid credentials";

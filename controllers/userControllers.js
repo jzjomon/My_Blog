@@ -51,7 +51,7 @@ const dosignup = (req, res) => {
 const dologin = (req, res) => {
     try {
         USER.findOne({ email: req.body.email, password: req.body.password }).then((response) => {
-            if (response) {
+            if (response && response.status) {
                 const token = jwt.sign({ userid: response._id }, process.env.JWT_PASS, { expiresIn: '2d' });
                 res.cookie('userToken', token, {
                     httpOnly: true,
@@ -60,7 +60,9 @@ const dologin = (req, res) => {
                     maxAge: 24 * 60 * 60 * 1000
                 })
                 res.status(200).json({ login: true })
-            } else {
+            }else if(response){
+                res.json({login:"blocked"})
+            }else {
                 res.json({ login: false })
             }
         })

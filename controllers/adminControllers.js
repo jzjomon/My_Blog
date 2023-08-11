@@ -82,8 +82,17 @@ const uploadBlog = (req, res) => {
 }
 const blockUser = (req, res) => {
     try { 
-        USER.findOne({ _id: req.body.id },{password:0}).then(response => {
-            
+        USER.findOneAndUpdate({ _id: req.query.id },{status:false}).then(response => {
+           res.redirect('/admin')
+        })
+    } catch (err) {
+        res.redirect('/admin/404')
+    }
+}
+const unblockUser = (req, res) => {
+    try {
+        USER.findOneAndUpdate({_id: req.query.id},{status:true}).then(response => {
+            res.redirect('/admin')
         })
     } catch (err) {
         res.render('admin/404')
@@ -133,4 +142,4 @@ const signout = (req, res) => {
     }
 }
 
-module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout };
+module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser };
