@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header{
+    background-color: rgb(211, 211, 211);
+    border-style: double;
+    border-color: rgb(79, 79, 79);
+    position:sticky;
+    top: 0;
+    z-index: 1;
+}
+.section{
+   background-color: rgb(221, 221, 221);
+   min-height: 100vh;
+}

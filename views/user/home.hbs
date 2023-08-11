@@ -63,9 +63,21 @@
         </div>
         <div class="options text-center">
           <ul>
-            <li class="list-unstyled"><button class="btn text-dark border mb-4 mt-5">Travel</button></li>
-            <li class="list-unstyled"><button class="btn text-dark border mb-4">Nature</button></li>
-            <li class="list-unstyled"><button class="btn text-dark border mb-4">Health</button></li>
+            <li class="list-unstyled">
+              <a href="/specificView?id=Travel">
+                <button class="btn text-dark border mb-4 mt-5">Travel</button>
+              </a>
+            </li>
+            <li class="list-unstyled">
+              <a href="/specificView?id=Nature">
+                <button class="btn text-dark border mb-4 mt-5">Nature</button>
+              </a>
+            </li>
+            <li class="list-unstyled">
+              <a href="/specificView?id=Health">
+                <button class="btn text-dark border mb-4 mt-5">Health</button>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -104,7 +116,7 @@
                 <div class="card">
                   <img src="/assets/{{this.images.[0].filename}}" class="card-img-top blog-img" alt="..." />
                   <div class="card-body bg-secondary">
-                    <p class="card-text text-white">{{this.catogory}}</p>
+                    <p class="card-text text-white">{{this.heading}}</p>
                   </div>
                 </div>
               </a>

@@ -166,6 +166,10 @@ const update = (req, res) => {
         res.render('user/404')
     }
 }
+const specificView = (req, res) =>{
+    UPLOADS.find({catogory:req.query.id}).then(response =>{
+        res.render('user/specificView.hbs',{data:response});
+    })
+} 
 
-
-module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update }
+module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView }
