@@ -172,6 +172,13 @@
                                     <td class="td td-r ps-2">{{this.firstName}} {{this.lastName}}</td>
                                     <td class="td td-r p-1 ps-2">{{this.email}}</td>
                                     <td class="td text-center">
+                                        {{#if this.requestCreator}}
+                                           <a href="/admin/acceptRequest?id={{this._id}}" class="text-decoration-none">
+                                            <button class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block">
+                                                Accept request
+                                            </button>
+                                           </a>
+                                        {{/if}}
                                         {{#if this.status}}
                                         <a href="/admin/blockUser?id={{this._id}}">
                                         <button class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block">Block

@@ -68,11 +68,15 @@
                             <div class="col-12 mt-5">
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-6"><button class="rounded-2 bg-secondary text-white ps-1 pe-1"
+                                        <div class="col-4"><button class="rounded-2 bg-secondary text-white ps-1 pe-1"
                                                 onclick="showEdit()" data-bs-toggle="modal"
                                                 data-bs-target="#staticBackdrop">Edit
                                                 Profile</button></div>
-                                        <div class="col-6 text-end"><button
+                                          <div class="col-4 text-end"><button
+                                                class="rounded-2 bg-secondary text-white ps-1 pe-1"
+                                                onclick="addPost('{{userDetails._id}}')">Add Post</button>
+                                        </div>
+                                        <div class="col-4 text-end"><button
                                                 class="rounded-2 bg-secondary text-white ps-1 pe-1"
                                                 onclick="logout()">Log Out</button>
                                         </div>

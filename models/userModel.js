@@ -24,6 +24,14 @@ const userSchema = mongoose.Schema({
         type:Boolean,
         default:true
     },
+    creater:{
+        type:Boolean,
+        default:false
+    },
+    requestCreator:{
+        type:Boolean,
+        default:false
+    },
     place:{
         type:String
     },

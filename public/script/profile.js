@@ -23,3 +23,34 @@ const saveProfile = () => {
         return false
     }
 }
+const addPost = (data) =>{
+    var data = data;
+    fetch('/admin/check',{
+        method:'post',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({data:data})
+    }).then(res => res.json())
+    .then(res => {
+        if(res.creator){
+            alert('you are a creator')
+        }else{
+            const result = confirm('You are not a content creator. click "OK" to request to admin')
+            if(result){
+                fetch('/admin/requestCreator',{
+                    method:"post",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({id:res.id})
+                }).then(res => res.json())
+                .then(res => {
+                    if(res.requested){
+                        alert('successfully requested')
+                    }
+                })
+            }
+        }
+    })
+}

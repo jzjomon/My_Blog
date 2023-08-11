@@ -141,5 +141,37 @@ const signout = (req, res) => {
         res.status(404).render('admin/404')
     }
 }
+const requestCreator = (req, res) => {
+    try{
+     USER.findOneAndUpdate({_id:req.body.id},{requestCreator:true}).then(response =>{
+        res.json({requested:true})
+     })
+    } catch (err) {
+        res.status(404).render('admin/404')
+    }
+}
+const check = (req, res) => {
+    try{
+    USER.findOne({_id:req.body.data}).then(response =>{
+        if(response.creater){
+            res.json({creator:true})
+        }else{
+            res.json({creater:false,id:response._id}) 
+        }
+    })
+} catch (err) {
+    res.status(404).render('admin/404')
+}
+}
+const acceptRequest = (req, res) => {
+    try{
+    USER.findOneAndUpdate({_id:req.query.id},{creater:true,requestCreator:false}).then(response =>{
+        res.redirect('/admin')
+    })
+} catch (err) {
+    res.status(404).render('admin/404')
+}
+}
 
-module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser };
+
+module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser, requestCreator, check, acceptRequest };

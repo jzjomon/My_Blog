@@ -13,6 +13,10 @@ const blogShema = mongoose.Schema({
         type:Date,
         default:new Date()
     },
+    // createdBy:{
+    //     type:String,
+
+    // },
     content:{
         type:String,
         required:true
