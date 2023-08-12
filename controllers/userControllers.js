@@ -169,7 +169,6 @@ const update = (req, res) => {
 const specificView = (req, res) =>{
     try{
         if(req.query.id){
-            console.log('id');
             UPLOADS.find({catogory:req.query.id}).then(response =>{
                 res.render('user/specificView.hbs',{data:response});
             })
@@ -186,7 +185,6 @@ const specificView = (req, res) =>{
 } 
 const uploadUserBlog = (req, res) => {
     try {
-        console.log(req.query);
         const fileStorage = multer.diskStorage({
             destination: (req, file, callback) => {
                 callback(null, "public/assets");
