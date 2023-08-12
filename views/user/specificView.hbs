@@ -40,7 +40,65 @@
         </div>
         {{!-- body --}}
         <div class="container-fluid">
-            {{#each data}}
+            {{#if data}}
+               {{#each data}}
+            <div class="row ">
+                {{!-- carousel --}}
+                <div class="col-xl-6 col-sm-12 p-3">
+                    <h3 class="text-center border border-dark rounded">{{this.heading}}</h3>
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators ">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            {{#if this.images.[0].filename}}
+                            <div class="carousel-item active  " data-bs-interval="2000">
+                                <img src="/assets/{{this.images.[0].filename}}" class="d-block  rounded-2 w-100"
+                                    alt="...">
+                            </div>
+                            {{/if}}
+                            {{#if this.images.[1].filename}}
+                            <div class="carousel-item active  " data-bs-interval="2000">
+                                <img src="/assets/{{this.images.[1].filename}}" class="d-block  rounded-2 w-100"
+                                    alt="...">
+                            </div>
+                            {{/if}}
+                            {{#if this.images.[2].filename}}
+                            <div class="carousel-item active  " data-bs-interval="2000">
+                                <img src="/assets/{{this.images.[2].filename}}" class="d-block  rounded-2 w-100"
+                                    alt="...">
+                            </div>
+                            {{/if}}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                {{!-- contents --}}
+                <div class="col-xl-6 col-sm-12 p-3 text-center">
+                    <h5 class="border border-dark rounded pt-2 pb-2">{{this.catogory}}</h5>
+                    <p>{{this.content}}
+
+                    </p>
+                </div>
+            </div>
+              {{/each}}       
+            {{/if}}
+            {{#if posts}}
+               {{#each posts}}
             <div class="row ">
                 {{!-- carousel --}}
                 <div class="col-xl-6 col-sm-12 p-3">
@@ -95,6 +153,7 @@
                 </div>
             </div>
               {{/each}}
+            {{/if}}
         </div>
     </section>
 </body>

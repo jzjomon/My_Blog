@@ -96,7 +96,7 @@ const Profile = (req, res) => {
 }
 const detailedView = (req, res) => {
     try {
-        UPLOADS.findOne({ _id: req.query.id }).then(response => {
+        UPLOADS.findOne({ _id: req.query.id }).populate({path:"createdBy",select:['firstName','lastName']}).then(response => {
             res.render('user/detailedView', { data: response })
         }).catch(err =>{
             res.render('user/404')
@@ -167,9 +167,51 @@ const update = (req, res) => {
     }
 }
 const specificView = (req, res) =>{
-    UPLOADS.find({catogory:req.query.id}).then(response =>{
-        res.render('user/specificView.hbs',{data:response});
-    })
+    try{
+        if(req.query.id){
+            console.log('id');
+            UPLOADS.find({catogory:req.query.id}).then(response =>{
+                res.render('user/specificView.hbs',{data:response});
+            })
+        }
+        else if(req.query.userId){
+            UPLOADS.find({createdBy:req.query.userId}).then(response =>{
+                res.render('user/specificView.hbs',{posts:response});
+            })
+        }
+    }catch (err) {
+        res.render('user/404')
+    }
+   
+} 
+const uploadUserBlog = (req, res) => {
+    try {
+        console.log(req.query);
+        const fileStorage = multer.diskStorage({
+            destination: (req, file, callback) => {
+                callback(null, "public/assets");
+            },
+            filename: (req, file, callback) => {
+                callback(null, Date.now() + "-" + file.originalname)
+            }
+        })
+        const upload = multer({ storage: fileStorage }).array('images', 3)
+        upload(req, res, (err) => {
+            UPLOADS({
+                heading: req.body.heading,
+                catogory:req.body.catogories,
+                content: req.body.content,
+                createdBy:req.query.id,
+                images: req.files
+            }).save().then((response) => {
+                res.redirect('/profile');
+            }).catch(err =>{
+                res.render('user/404')
+            })
+        })
+    }catch (err) {
+        res.render('user/404')
+    }
 } 
 
-module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView }
+module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView, uploadUserBlog }

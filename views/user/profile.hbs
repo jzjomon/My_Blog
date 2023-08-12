@@ -27,6 +27,9 @@
                             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div class="navbar-nav">
                                     <a class="nav-link active fw-bold fs-5" aria-current="page" href="/home">Home</a>
+                                    {{#if userDetails.creater}}
+                                       <a href="/specificView?userId={{userDetails._id}}" class="nav-link active fw-bold fs-5" >My Posts</a>
+                                    {{/if}}
                                 </div>
                             </div>
                         </div>
@@ -124,7 +127,7 @@
                 </div>
             </div>
         </div>
-        <form action="" enctype="multipart/form-data" method="post">
+        <form action="/uploadUserBlog?id={{userDetails._id}}" enctype="multipart/form-data" method="post">
                     <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable">
@@ -151,9 +154,9 @@
                                             </div>
                                             <div class="col-12">
                                                 <h3>Attachments</h3>
-                                                <input type="file" multiple accept="image/*" name="images" id="getImg"
-                                                    onchange="showImg()">
-                                                <div id="showImage"></div>
+                                                <input type="file" multiple accept="image/*" name="images" id="getImg1"
+                                                    onchange="showUploadImg()">
+                                                <div id="showImage1"></div>
                                             </div>
                                             <div class="col-12">
                                                 <h3>Heading</h3>

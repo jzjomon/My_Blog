@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {login,signup,dosignup,dologin,Home,Profile,detailedView,logout,update,specificView} = require('../controllers/userControllers');
+const {login,signup,dosignup,dologin,Home,Profile,detailedView,logout,update,specificView, uploadUserBlog} = require('../controllers/userControllers');
 const {userAuth} = require('../middlewares/userAuth')
 
 router.get('/',login)
@@ -13,5 +13,6 @@ router.get('/detailedView',userAuth,detailedView)
 router.get('/logout',userAuth,logout)
 router.post('/update',userAuth,update)
 router.get('/specificView',userAuth,specificView)
+router.post('/uploadUserBlog',userAuth,uploadUserBlog)
 
 module.exports=router;

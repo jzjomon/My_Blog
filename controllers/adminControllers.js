@@ -121,7 +121,7 @@ const removePost = ( req, res) => {
 }
 const viewPage = (req, res) => {
     try {
-        UPLOADS.findOne({ _id: req.query.id }).then(response => {
+        UPLOADS.findOne({ _id: req.query.id }).populate({path:"createdBy",select:['firstName','lastName']}).then(response => {
             res.render('admin/view', { data: response})
         })
     } catch (err) {

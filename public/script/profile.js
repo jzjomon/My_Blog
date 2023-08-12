@@ -56,3 +56,20 @@ const addPost = (data) =>{
         }
     })
 }
+const showUploadImg = () => {
+    const img = document.querySelector("#getImg1")
+    const showImage = document.querySelector('#showImage1');
+    document.querySelector('#showImage1').innerHTML = null;
+    const selectedImg = img.files;
+    if(selectedImg.length > 3){
+        showImage.innerHTML = 'maximum 3 images !'
+        showImage.style.color = 'red'
+    }else{
+        for (x of selectedImg) {
+            const image = document.createElement('img')
+            image.style.cssText = `width:150px; margin:3px;`
+            image.src = URL.createObjectURL(x)
+            showImage.appendChild(image);
+        }
+    }
+}

@@ -87,7 +87,12 @@
                 </div>
                 {{!-- contents --}}
                 <div class="col-xl-6 col-sm-12 p-3 text-center">
-                    <h5 class="border border-dark rounded pt-2 pb-2">{{data.catogory}}</h5>
+                    {{#if data.createdBy}}
+                        <h5 class="border border-dark rounded pt-2 pb-2">{{data.createdBy.firstName}} {{data.createdBy.lastName}}</h5>
+                        {{else}}
+                            <h5 class="border border-dark rounded pt-2 pb-2">Admin</h5>
+                    {{/if}}
+                   
                     <p>{{data.content}}
 
                     </p>
