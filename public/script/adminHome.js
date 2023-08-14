@@ -16,19 +16,6 @@ const showImg = () => {
     }
 }
 
-let managePost = document.querySelector('.manage-post');
-let manageUser = document.querySelector('.manage-users');
-
-const showPost = () => { 
-    manageUser.style.display = 'none';
-    managePost.style.display = 'block';
-}
-const showUser = () => {
-    managePost.style.display = 'none'
-    manageUser.style.display = 'block'
-}
-
-
 const slNo = document.querySelectorAll('.slNo');
 const sl = document.querySelectorAll('.sl');
 let i = 1;

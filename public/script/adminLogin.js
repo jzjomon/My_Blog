@@ -35,7 +35,7 @@ function validateAll() {
             body: JSON.stringify(formdata)
         }).then((res) => res.json()).then((res) => {
             if (res.login) {
-                window.location.href = "admin/home"
+                window.location.href = "admin/home?page=1"
             }else {
                 document.querySelector('#warningPassword').innerHTML = "invalid credentials";
                 document.querySelector('#warningPassword').style.color = "red";

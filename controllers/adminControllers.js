@@ -11,7 +11,7 @@ const convertISO = require('../helpers/dateConverter')
 const login = (req, res) => {
     try {
         if (req.cookies.adminToken) {
-            res.redirect('admin/home')
+            res.redirect('admin/home?page=1')
         } else {
             res.render('admin/login')
         }
@@ -41,15 +41,30 @@ const doLogin = (req, res) => {
 }
 const home = (req, res) => {
     try {
-        USER.find().then(response => {
-            UPLOADS.find().then(posts => {
-                for(x of posts){
-                    x.date = convertISO(x.uploadedAt)
-                }
-                res.render('admin/home', { data: response, posts: posts});
-            })
+        USER.find().then(response => {          
+                res.render('admin/home', { data: response}); 
         })
     } catch (err) { 
+        res.render('admin/404')
+    }
+}
+const manageUser = (req, res) => {
+    try {
+        const page = parseInt(req.query.page);
+        const limit = 4;
+        const start = (page - 1) * limit;
+        USER.find().limit(limit).skip(start).then( response => {
+            let nextPage = page + 1;
+        let previous = page - 1;
+        if (page < response.length) {
+            res.render('admin/manageUser',{ data: response, next: nextPage })
+        } else if (page > response.length) {
+            res.render('admin/manageUser',{ data: response, previous: previous })
+        } else {
+            res.render('admin/manageUser',{ data: response, next: nextPage, previous: previous })
+        }
+        })
+    }catch (err) {
         res.render('admin/404')
     }
 }
@@ -83,7 +98,7 @@ const uploadBlog = (req, res) => {
 const blockUser = (req, res) => {
     try { 
         USER.findOneAndUpdate({ _id: req.query.id },{status:false}).then(response => {
-           res.redirect('/admin')
+           res.redirect('/admin/manageUser')
         })
     } catch (err) {
         res.redirect('/admin/404')
@@ -92,7 +107,7 @@ const blockUser = (req, res) => {
 const unblockUser = (req, res) => {
     try {
         USER.findOneAndUpdate({_id: req.query.id},{status:true}).then(response => {
-            res.redirect('/admin')
+            res.redirect('/admin/manageUser')
         })
     } catch (err) {
         res.render('admin/404')
@@ -174,4 +189,4 @@ const acceptRequest = (req, res) => {
 }
 
 
-module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser, requestCreator, check, acceptRequest };
+module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser, requestCreator, check, acceptRequest, manageUser };

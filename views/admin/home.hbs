@@ -30,12 +30,12 @@
             <div class="col-sm-3 col-xl-2 side-section text-white">
                 <div class="container manage">
                     <div class="row pt-2">
-                        <div class="col text-center p-3 manages"><a href="#" class="text-decoration-none text-white"
-                                onclick="showPost()">Manage Posts</a></div>
+                        <div class="col text-center p-3 manages"><a href="#"
+                                class="text-decoration-none text-white">Manage Posts</a></div>
                     </div>
                     <div class="row">
-                        <div class="col text-center p-3 manages"><a href="#" class="text-decoration-none text-white"
-                                onclick="showUser()">Manage Users</a></div>
+                        <div class="col text-center p-3 manages"><a href="/admin/manageUser?page=1"
+                                class="text-decoration-none text-white">Manage Users</a></div>
                     </div>
                     {{!-- <div class="row">
                         <div class="col text-center p-3 manages"><a href="#" class="text-decoration-none text-white"
@@ -143,73 +143,25 @@
                                 </tr>
 
                             </table>
-                        </div>
-                    </div>
-
-                </div>
-                {{!-- manage users section --}}
-                <div class="container-fluid manage-users">
-                    {{!-- <div class="row p-2">
-                        <div class="col text-end">
-                            <button class="ps-2 pe-2">Search</button>
-                            <span>:</span>
-                            <input type="text">
-                        </div>
-                    </div> --}}
-                    <div class="row">
-                        <div class="col-12 text-center fs-3 mb-4 fw-bold">Manage Users</div>
-                        <div class="col-12">
-                            <table class="w-100 mt-2">
-                                <tr>
-                                    <th class="fside1">SN</th>
-                                    <th class="fside2">Name</th>
-                                    <th class="center">Email ID</th>
-                                    <th class="lside">Action</th>
-                                </tr>
-                                {{#each data}}
-                                <tr>
-                                    <td class="td td-r ps-2 sl"></td>
-                                    <td class="td td-r ps-2">{{this.firstName}} {{this.lastName}}</td>
-                                    <td class="td td-r p-1 ps-2">{{this.email}}</td>
-                                    <td class="td text-center">
-                                        {{#if this.requestCreator}}
-                                           <a href="/admin/acceptRequest?id={{this._id}}" class="text-decoration-none">
-                                            <button class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block">
-                                                Accept request
-                                            </button>
-                                           </a>
-                                        {{/if}}
-                                        {{#if this.status}}
-                                        <a href="/admin/blockUser?id={{this._id}}">
-                                        <button class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block">Block
-                                            User</button>
-                                        </a>
-                                        {{else}}
-                                        <a href="/admin/unblockUser?id={{this._id}}">
-                                            <button class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block">
-                                                Unblock User
-                                            </button>
-                                        </a>
-                                        {{/if}}
-                                    </td>
-                                </tr>
-                                {{/each}}
-                                <tr>
-                                    <td class="td-r"></td>
-                                    <td class="td-r"></td>
-                                    <td class="td-r "></td>
-                                    <td class="text-center">
-                                        <a href="" class="text-success text-decoration-none me-4"></a>
-                                        <a href="" class="text-danger text-decoration-none"></a>
-                                    </td>
-                                </tr>
-                            </table>
+                            <div class="d-flex justify-content-around">
+                                {{#if previous}}
+                                <a href="/admin/home?page={{previous}}">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </a>
+                                {{/if}}
+                                {{#if next}}
+                                <a href="/admin/home?page={{next}}">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                                {{/if}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://kit.fontawesome.com/2cca22d63c.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>
