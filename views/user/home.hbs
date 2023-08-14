@@ -110,25 +110,32 @@
         </div>
         <div class="container w-75">
           <div class="row d-flex">
-            {{#each data}}
+            {{#each posts}}
             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
               <a href="/detailedView?id={{this._id}}" class="text-decoration-none">
                 <div class="card">
                   <img src="/assets/{{this.images.[0].filename}}" class="card-img-top blog-img" alt="..." />
                   <div class="card-body bg-secondary">
-                    <p class="card-text text-white">{{this.heading}}</p>
+                    <p class="card-text text-white">{{this.catogory}}</p>
                   </div>
                 </div>
               </a>
             </div>
             {{/each}}
-          </div>
-          <div class="pagination d-flex justify-content-between">
-            <i class="fa-solid fa-angle-left"></i>
-            <i class="fa-solid fa-angle-right"></i>
-          </div>
+          </div>     
+            <div class="d-flex justify-content-around">
+              {{#if previous}}
+                 <a href="/home?page={{previous}}">
+                  <i class="fa-solid fa-chevron-left"></i>
+                 </a>
+              {{/if}}
+              {{#if next}}
+                 <a href="/home?page={{next}}">
+                  <i class="fa-solid fa-chevron-right"></i>
+                 </a>
+              {{/if}}    
+            </div>
         </div>
-
       </div>
     </div>
   </section>

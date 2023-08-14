@@ -38,7 +38,7 @@ function validateAll() {
                 if(res.login == 'blocked'){
                     alert('you have been blocked by the admin')
                 }else if(res.login == true) {
-                    window.location.href = '/home'
+                    window.location.href = '/home?page=1'
                 }else {
                     document.querySelector('#warningPassword').innerHTML = "invalid credentials";
                     document.querySelector('#warningPassword').style.color = "red";

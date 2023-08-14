@@ -6,19 +6,19 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const parseJwt = require('../helpers/jwtParser');
-const convertISO = require('../helpers/dateConverter')
+const convertISO = require('../helpers/dateConverter');
 
 
 const login = (req, res) => {
     try {
         if (req.cookies.userToken) {
-            res.redirect('/home')
+            res.redirect('/home?page=1')
         } else {
             res.render('user/login')
         }
     } catch (err) {
         res.render('user/404')
-    }
+    } 
 
 }
 const signup = (req, res) => {
@@ -60,9 +60,9 @@ const dologin = (req, res) => {
                     maxAge: 24 * 60 * 60 * 1000
                 })
                 res.status(200).json({ login: true })
-            }else if(response){
-                res.json({login:"blocked"})
-            }else {
+            } else if (response) {
+                res.json({ login: "blocked" })
+            } else {
                 res.json({ login: false })
             }
         })
@@ -72,15 +72,13 @@ const dologin = (req, res) => {
 }
 const Home = (req, res) => {
     try {
-        UPLOADS.find().then(response => {
-            UPLOADS.find().sort({ uploadedAt: -1 }).limit(5).then(sorted => {
-                for(x of sorted){
-                    x.date = convertISO(x.uploadedAt)
-                }
-                res.render('user/home', { data: response, latest: sorted })
-            }).catch(err =>{
-                res.render('user/404')
-            })
+        UPLOADS.find().sort({ uploadedAt: -1 }).limit(5).then(sorted => {
+            for (x of sorted) {
+                x.date = convertISO(x.uploadedAt)
+            }
+            res.render('user/home', { latest: sorted })
+        }).catch(err => {
+            res.render('user/404')
         })
     } catch (err) {
         res.render('user/404')
@@ -96,9 +94,9 @@ const Profile = (req, res) => {
 }
 const detailedView = (req, res) => {
     try {
-        UPLOADS.findOne({ _id: req.query.id }).populate({path:"createdBy",select:['firstName','lastName']}).then(response => {
+        UPLOADS.findOne({ _id: req.query.id }).populate({ path: "createdBy", select: ['firstName', 'lastName'] }).then(response => {
             res.render('user/detailedView', { data: response })
-        }).catch(err =>{
+        }).catch(err => {
             res.render('user/404')
         })
     } catch (err) {
@@ -142,9 +140,9 @@ const update = (req, res) => {
                 userdata.place = req.body.place;
             } else if (req.files != "") {
                 userdata.image = req.files;
-                const filePath = path.join(__dirname,'..','public/assets',req.query.id);
-                fs.unlink(filePath, err =>{ 
-                    if(err){
+                const filePath = path.join(__dirname, '..', 'public/assets', req.query.id);
+                fs.unlink(filePath, err => {
+                    if (err) {
                         throw err
                     }
                 })
@@ -158,7 +156,7 @@ const update = (req, res) => {
                 image: userdata.image
             }).then(response => {
                 res.redirect('/profile')
-            }).catch(err =>{
+            }).catch(err => {
                 res.render('user/404')
             })
         })
@@ -166,23 +164,23 @@ const update = (req, res) => {
         res.render('user/404')
     }
 }
-const specificView = (req, res) =>{
-    try{
-        if(req.query.id){
-            UPLOADS.find({catogory:req.query.id}).then(response =>{
-                res.render('user/specificView.hbs',{data:response});
+const specificView = (req, res) => {
+    try {
+        if (req.query.id) {
+            UPLOADS.find({ catogory: req.query.id }).then(response => {
+                res.render('user/specificView.hbs', { data: response });
             })
         }
-        else if(req.query.userId){
-            UPLOADS.find({createdBy:req.query.userId}).then(response =>{
-                res.render('user/specificView.hbs',{posts:response});
+        else if (req.query.userId) {
+            UPLOADS.find({ createdBy: req.query.userId }).then(response => {
+                res.render('user/specificView.hbs', { posts: response });
             })
         }
-    }catch (err) {
+    } catch (err) {
         res.render('user/404')
     }
-   
-} 
+
+}
 const uploadUserBlog = (req, res) => {
     try {
         const fileStorage = multer.diskStorage({
@@ -197,19 +195,19 @@ const uploadUserBlog = (req, res) => {
         upload(req, res, (err) => {
             UPLOADS({
                 heading: req.body.heading,
-                catogory:req.body.catogories,
+                catogory: req.body.catogories,
                 content: req.body.content,
-                createdBy:req.query.id,
+                createdBy: req.query.id,
                 images: req.files
             }).save().then((response) => {
                 res.redirect('/profile');
-            }).catch(err =>{
+            }).catch(err => {
                 res.render('user/404')
             })
         })
-    }catch (err) {
+    } catch (err) {
         res.render('user/404')
     }
-} 
+}
 
 module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView, uploadUserBlog }
