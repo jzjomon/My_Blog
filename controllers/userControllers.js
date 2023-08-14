@@ -95,9 +95,11 @@ const Profile = (req, res) => {
 const detailedView = (req, res) => {
     try {
         UPLOADS.findOne({ _id: req.query.id }).populate({ path: "createdBy", select: ['firstName', 'lastName'] }).then(response => {
-            res.render('user/detailedView', { data: response })
+            let date = convertISO(response.uploadedAt)
+
+            res.render('user/detailedView', { data: response, date:date })
         }).catch(err => {
-            res.render('user/404')
+            res.render('user/404');
         })
     } catch (err) {
         res.render('user/404')

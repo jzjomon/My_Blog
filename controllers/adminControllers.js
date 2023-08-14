@@ -86,7 +86,7 @@ const uploadBlog = (req, res) => {
                 content: req.body.content,
                 images: req.files
             }).save().then((response) => {
-                res.redirect('/admin/home');
+                res.redirect('/admin/home?page=1');
             }).catch(err =>{
                 res.render('admin/404')
             })
@@ -137,7 +137,8 @@ const removePost = ( req, res) => {
 const viewPage = (req, res) => {
     try {
         UPLOADS.findOne({ _id: req.query.id }).populate({path:"createdBy",select:['firstName','lastName']}).then(response => {
-            res.render('admin/view', { data: response})
+            let date = convertISO(response.uploadedAt)
+            res.render('admin/view', { data: response, date:date})
         })
     } catch (err) {
         res.render('admin/404')
