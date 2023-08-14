@@ -52,3 +52,12 @@ function validateAll() {
         return false
     }
 }
+const forgotPassAlert = () => {
+    const result = prompt("enter your email id");
+    if(result == "" || result == null){
+        alert('you are not entered any email id');
+    }else{
+        window.location.href = "/resetPass?admin=true&mail="+result;
+        alert('reset link succesfully sent to your email. please open your email to reset password')
+    }
+}

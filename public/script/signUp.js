@@ -73,7 +73,7 @@ function validateAll(){
         }).then((res) => res.json())
         .then((res) => {
             if(res.signup){
-                window.location.href = '/home';
+                window.location.href = '/home?page=1';
             }else{
                 alert('you already have an account. please login');
             }

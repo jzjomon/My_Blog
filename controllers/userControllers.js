@@ -7,7 +7,16 @@ const fs = require('fs');
 const path = require('path');
 const parseJwt = require('../helpers/jwtParser');
 const convertISO = require('../helpers/dateConverter');
+const nodemailer = require('nodemailer');
 
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'jomon964510@gmail.com',
+        pass: 'dbttfzdfvogtebtb'
+    }
+})
 
 const login = (req, res) => {
     try {
@@ -18,7 +27,7 @@ const login = (req, res) => {
         }
     } catch (err) {
         res.render('user/404')
-    } 
+    }
 
 }
 const signup = (req, res) => {
@@ -97,7 +106,7 @@ const detailedView = (req, res) => {
         UPLOADS.findOne({ _id: req.query.id }).populate({ path: "createdBy", select: ['firstName', 'lastName'] }).then(response => {
             let date = convertISO(response.uploadedAt)
 
-            res.render('user/detailedView', { data: response, date:date })
+            res.render('user/detailedView', { data: response, date: date })
         }).catch(err => {
             res.render('user/404');
         })
@@ -211,5 +220,58 @@ const uploadUserBlog = (req, res) => {
         res.render('user/404')
     }
 }
+const resetPass = (req, res) => {
+    if (req.query.admin == 'true') {
+        try {
+            const mailOptions = {
+                from: "jomon964510@gmail.com",
+                to: req.query.mail,
+                subject: "hey you can change your password here",
+                html: '<a href="http://localhost:8080/admin/resetPage">Reset pass</a>'
+            }
+            transporter.sendMail(mailOptions, err => {
+                if (err) {
+                    res.render('admin/404')
+                }
+            })
+        } catch (err) {
+            res.render('admin/404')
+        }
+    } else if (req.query.user == 'true') {
+        try {
+            const mailOptions = {
+                from: "jomon964510@gmail.com",
+                to: req.query.mail,
+                subject: "hey you can change your password here",
+                html: '<a href="http://localhost:8080/resetPage">Reset pass</a>'
+            }
+            transporter.sendMail(mailOptions, err => {
+                if (err) {
+                    res.render('user/404')
+                }
+            })
+        } catch (err) {
+            res.render('user/404')
+        }
+    }
+}
 
-module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView, uploadUserBlog }
+const resetPage = (req, res) => {
+    try {
+        res.render('user/resetPass');
+    } catch (err) {
+        res.render('user/404')
+    }
+}
+const updateReset = (req, res) => {
+    try {
+        USER.findOneAndUpdate({ email: req.body.data.email }, { password: req.body.data.password }).then(response => {
+            res.json({ reset: true })
+        })
+    } catch (err) {
+        res.render('user/404')
+    }
+
+}
+
+module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView, uploadUserBlog, resetPass, resetPage, updateReset }

@@ -188,6 +188,22 @@ const acceptRequest = (req, res) => {
     res.status(404).render('admin/404')
 }
 }
+const resetPage = (req, res) => {
+    try{
+        res.render('admin/resetPass')
+    }catch (err) {
+        res.render('admin/404')
+    }
+}
+const updateReset = (req, res) => {
+    try{
+        ADMIN.findOneAndUpdate({ email: req.body.data.email }, { password: req.body.data.password }).then(response => {
+            res.json({ reset: true })
+        })
+    }catch (err) {
+        res.render('admin/404')
+    }
+}
 
 
-module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser, requestCreator, check, acceptRequest, manageUser };
+module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser, requestCreator, check, acceptRequest, manageUser, resetPage, updateReset };
