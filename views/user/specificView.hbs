@@ -30,7 +30,10 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div class="navbar-nav">
-                                    <a class="nav-link active fw-bold fs-5" aria-current="page" href="/home">Home</a>
+                                    <a class="nav-link active fw-bold fs-5" aria-current="page" href="/home?page=1">Home</a>
+                                </div>
+                                <div class="navbar-nav">
+                                    <a class="nav-link active fw-bold fs-5" role="button" aria-current="page"  onclick="history.back()">go back</a>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +44,7 @@
         {{!-- body --}}
         <div class="container-fluid">
             {{#if data}}
-               {{#each data}}
+            {{#each data}}
             <div class="row ">
                 {{!-- carousel --}}
                 <div class="col-xl-6 col-sm-12 p-3">
@@ -95,10 +98,10 @@
                     </p>
                 </div>
             </div>
-              {{/each}}       
+            {{/each}}
             {{/if}}
             {{#if posts}}
-               {{#each posts}}
+            {{#each posts}}
             <div class="row ">
                 {{!-- carousel --}}
                 <div class="col-xl-6 col-sm-12 p-3">
@@ -152,7 +155,7 @@
                     </p>
                 </div>
             </div>
-              {{/each}}
+            {{/each}}
             {{/if}}
         </div>
     </section>

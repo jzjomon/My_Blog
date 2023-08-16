@@ -182,7 +182,7 @@ const check = (req, res) => {
 const acceptRequest = (req, res) => {
     try{
     USER.findOneAndUpdate({_id:req.query.id},{creater:true,requestCreator:false}).then(response =>{
-        res.redirect('/admin')
+        res.redirect('/admin/manageUser?page=1')
     })
 } catch (err) {
     res.status(404).render('admin/404')
