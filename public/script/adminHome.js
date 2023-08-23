@@ -3,10 +3,10 @@ const showImg = () => {
     const showImage = document.querySelector('#showImage');
     document.querySelector('#showImage').innerHTML = null;
     const selectedImg = img.files;
-    if(selectedImg.length > 3){
+    if (selectedImg.length > 3) {
         showImage.innerHTML = 'maximum 3 images !'
         showImage.style.color = 'red'
-    }else{
+    } else {
         for (x of selectedImg) {
             const image = document.createElement('img')
             image.style.cssText = `width:150px; margin:3px;`
@@ -28,28 +28,41 @@ for (x of slNo) {
     x.innerHTML = j;
     j++
 }
-
-const deletePost = (id) =>{
-    const cofirmation = confirm('do you want to delete this post?');
-    if(cofirmation){
-        fetch('/admin/deletePost',{
-            method:"delete",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({postId:id})
-        }).then(response => response.json())
-        .then(res =>{
-            if(res.delete){
-                window.location.reload()
-            }else{
-                alert('something went wrong')
-            }
-        })
-    }
+const deletePost = (id) => {
+    swal({
+        title: 'Are you sure?',
+        text: "This file will permanently deleted !",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function(res) {
+        if(res.value){
+            fetch('/admin/deletePost',{
+                method:"delete",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({postId:id})
+            }).then(response => response.json())
+            .then(res =>{
+                if(res.delete){
+                    swal(
+                        'Deleted!',
+                        'Post has been deleted.',
+                        'success'
+                      ).then(() =>{
+                        window.location.reload()
+                      })  
+                }
+            })
+        }
+        
+      })
 }
 
-const signout = () =>{
+const signout = () => {
     localStorage.clear();
     sessionStorage.clear();
     location.assign('/admin/signout')

@@ -13,8 +13,8 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth:{
-        user: '',
-        pass: ''
+        user: process.env.MAIL,
+        pass: process.env.MAIL_PASS
     }
 })
 
@@ -125,12 +125,12 @@ const logout = (req, res) => {
         req.cookies.userToken = null;
         res.redirect('/')
     } catch (err) {
-        res.render('user/404')
+        res.render('user/404') 
     }
 }
 const update = (req, res) => {
     try {
-        const fileStorage = multer.diskStorage({
+        const fileStorage = multer.diskStorage({ 
             destination: (req, file, callback) => {
                 callback(null, "public/assets")
             },
@@ -152,16 +152,12 @@ const update = (req, res) => {
             } else if (req.files != "") {
                 userdata.image = req.files;
                 const filePath = path.join(__dirname, '..', 'public/assets', req.query.id);
-                fs.unlink(filePath, err => {
-                    if (err) {
-                        throw err
-                    }
-                })
+                fs.unlinkSync(filePath);
             }
             const parsedCookie = parseJwt(req.cookies.userToken)
             USER.findOneAndUpdate({ _id: parsedCookie.userid }, {
                 firstName: userdata.firstname,
-                lastName: userdata.lastname,
+                lastName: userdata.lastname, 
                 work: userdata.work,
                 place: userdata.place,
                 image: userdata.image
@@ -232,6 +228,8 @@ const resetPass = (req, res) => {
             transporter.sendMail(mailOptions, err => {
                 if (err) {
                     res.render('admin/404')
+                }else{
+                    res.redirect('/admin/')
                 }
             })
         } catch (err) {
@@ -248,6 +246,8 @@ const resetPass = (req, res) => {
             transporter.sendMail(mailOptions, err => {
                 if (err) {
                     res.render('user/404')
+                }else{
+                    res.redirect('/')
                 }
             })
         } catch (err) {

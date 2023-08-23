@@ -53,11 +53,22 @@ function validateAll() {
     }
 }
 const forgotPassAlert = () => {
-    const result = prompt("enter your email id");
-    if(result == "" || result == null){
-        alert('you are not entered any email id');
-    }else{
-        window.location.href = "/resetPass?admin=true&mail="+result;
-        alert('reset link succesfully sent to your email. please open your email to reset password')
-    }
+    swal({
+        title: 'Are you sure ?',
+        input: "text",
+        text: "Enter your email id",
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'OK'
+    }).then(res => {
+        if (res.value.length > 0) {
+            window.location.href = "/resetPass?admin=true&mail=" + res.value;
+            swal("Reset link succesfully sent to your email", "please check your email and reset password", "success")
+            
+        } else {
+            swal("Something went wrong !", "", "warning")
+        }
+    })
 }

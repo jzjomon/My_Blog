@@ -97,7 +97,7 @@ const uploadBlog = (req, res) => {
 }
 const blockUser = (req, res) => {
     try { 
-        USER.findOneAndUpdate({ _id: req.query.id },{status:false}).then(response => {
+        USER.findOneAndUpdate({ _id: req.query.id },{status:false,creater:false}).then(response => {
            res.redirect('/admin/manageUser')
         })
     } catch (err) {

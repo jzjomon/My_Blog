@@ -35,11 +35,11 @@ function validateAll() {
             body: JSON.stringify(formdata)
         }).then((res) => res.json())
             .then((res) => {
-                if(res.login == 'blocked'){
-                    alert('you have been blocked by the admin')
-                }else if(res.login == true) {
+                if (res.login == 'blocked') {
+                    swal("You have been blocked by the admin !", "", "warning")
+                } else if (res.login == true) {
                     window.location.href = '/home?page=1'
-                }else {
+                } else {
                     document.querySelector('#warningPassword').innerHTML = "invalid credentials";
                     document.querySelector('#warningPassword').style.color = "red";
                     document.querySelector('#warningEmail').innerHTML = "invalid credentials";
@@ -47,7 +47,7 @@ function validateAll() {
                     setTimeout(() => {
                         document.querySelector('#warningPassword').innerHTML = "";
                         document.querySelector('#warningEmail').innerHTML = "";
-                    },2000);
+                    }, 2000);
                 }
             })
 
@@ -57,11 +57,22 @@ function validateAll() {
     }
 }
 const forgotPassAlert = () => {
-    const result = prompt("enter your email id");
-    if(result == "" || result == null){
-        alert('you are not entered any email id');
-    }else{
-        window.location.href = "/resetPass?user=true&mail="+result;
-        alert('reset link succesfully sent to your email. please open your email to reset password')
-    }
+    swal({
+        title: 'Are you sure ?',
+        input: "text",
+        text: "Enter your email id",
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'OK'
+    }).then(res => {
+        if (res.value.length > 0) {
+            window.location.href = "/resetPass?user=true&mail=" + res.value;
+            swal("Reset link succesfully sent to your email", "please check your email and reset password", "success")
+            
+        } else {
+            swal("Something went wrong !", "", "warning")
+        }
+    })
 }

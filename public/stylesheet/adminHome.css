@@ -70,7 +70,16 @@
 .view-option{
     cursor: pointer;
 }
-#content{
+#contentshow{
     max-height: 90px;
     overflow: hidden;
+}
+#modal-background{
+    background-color: rgb(179, 189, 199) ;
+}
+.inputfile{
+    font-size: small;
+}
+.selectone{
+    font-size: small;
 }

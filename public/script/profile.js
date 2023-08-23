@@ -15,55 +15,77 @@ const showImg = () => {
         showImg.appendChild(image);
     }
 }
-const saveProfile = () => {
-    const result = confirm("do you want to save this details")
-    if (result) {
-        return true
-    }else{
-        return false
-    }
-}
-const addPost = (data) =>{
-    var data = data;
-    fetch('/admin/check',{
-        method:'post',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify({data:data})
-    }).then(res => res.json())
-    .then(res => {
-        if(res.creator){
-            const myModal = new bootstrap.Modal('#staticBackdrop2');
-            myModal.show();
-        }else{
-            const result = confirm('You are not a content creator. click "OK" to request to admin')
-            if(result){
-                fetch('/admin/requestCreator',{
-                    method:"post",
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify({id:res.id})
-                }).then(res => res.json())
-                .then(res => {
-                    if(res.requested){
-                        alert('successfully requested')
-                    }
-                })
-            }
+const updateAlert = () => {
+    swal({
+        title: 'Are You Sure ?',
+        text: "Save this details",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Save'
+    }).then(res => {
+        if(res.value){
+           document.theForm.submit();
         }
     })
+}
+const addPost = (data) => {
+    var data = data;
+    fetch('/admin/check', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: data })
+    }).then(res => res.json())
+        .then(res => {
+            let id = res.id;
+            if (res.creator) {
+                const myModal = new bootstrap.Modal('#staticBackdrop2');
+                myModal.show();
+            } else {
+                swal({
+                    title: 'Not A Content Creator?',
+                    text: "Request to Admin",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Request'
+                }).then((res) => {
+                    if (res.value) {
+                        fetch('/admin/requestCreator', {
+                            method: "post",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ id: id })
+                        }).then(res => res.json())
+                            .then(res => {
+                                if (res.requested) {
+                                    swal(
+                                        'Requested',
+                                        "",
+                                        'success'
+                                    )
+                                }
+                            })
+                    }
+
+                })
+            }
+        })
 }
 const showUploadImg = () => {
     const img = document.querySelector("#getImg1")
     const showImage = document.querySelector('#showImage1');
     document.querySelector('#showImage1').innerHTML = null;
     const selectedImg = img.files;
-    if(selectedImg.length > 3){
+    if (selectedImg.length > 3) {
         showImage.innerHTML = 'maximum 3 images !'
         showImage.style.color = 'red'
-    }else{
+    } else {
         for (x of selectedImg) {
             const image = document.createElement('img')
             image.style.cssText = `width:150px; margin:3px;`

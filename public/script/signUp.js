@@ -75,7 +75,7 @@ function validateAll(){
             if(res.signup){
                 window.location.href = '/home?page=1';
             }else{
-                alert('you already have an account. please login');
+                swal("You already have an account", "please login", "warning");
             }
         })
         return true
