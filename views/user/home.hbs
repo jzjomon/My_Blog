@@ -92,11 +92,6 @@
               alt="post-img" />
             <span class="d-block m-2">{{this.heading}} — {{this.date}}</span>
             <span class="d-block fw-bold fs-6 m-2">{{this.content}}</span>
-            {{!-- <div class="author d-flex flex-row gap-3 m-2">
-              <img src="https://preview.colorlib.com/theme/magdesign/images/person_1.jpg" class="author-img" alt="" />
-              <div class="d-flex flex-column"><span class="fw-bold">Sergy
-                  Campbell</span><span class="text-dark">CEO and Founder</span></div>
-            </div> --}}
           </div>
         </div>
         {{/each}}
@@ -109,7 +104,7 @@
         <div class="container w-75">
           <div class="row d-flex">
             {{#each posts}}
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
+            <div class="col-xl-3 small-posts col-lg-4 col-md-4 col-sm-6 col-10 mb-2">
               <a href="/detailedView?id={{this._id}}" class="text-decoration-none">
                 <div class="card">
                   <img src="/assets/{{this.images.[0].filename}}" class="card-img-top blog-img" alt="..." />

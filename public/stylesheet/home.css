@@ -78,3 +78,18 @@
 .blog-img{
     max-height: 80px;
 }
+.posts{
+    transition: .9s;
+}
+.posts:hover{
+    transform: scale(1.1);
+}
+.small-posts{
+    transition: .9s;
+}
+.small-posts:hover{
+    transform: scale(1.1);
+}
+.profile-icon:hover{
+    transform: scale(1.2);
+}
