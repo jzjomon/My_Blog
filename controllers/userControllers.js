@@ -218,12 +218,13 @@ const uploadUserBlog = (req, res) => {
 }
 const resetPass = (req, res) => {
     if (req.query.admin == 'true') {
+        let mail = req.query.mail;
         try {
             const mailOptions = {
                 from: "jomon964510@gmail.com",
                 to: req.query.mail,
                 subject: "hey you can change your password here",
-                html: '<a href="http://localhost:8080/admin/resetPage">Reset pass</a>'
+                html: `<a href="http://localhost:8080/admin/resetPage?mail=${mail}">Reset pass</a>`
             }
             transporter.sendMail(mailOptions, err => {
                 if (err) {
@@ -236,12 +237,13 @@ const resetPass = (req, res) => {
             res.render('admin/404')
         }
     } else if (req.query.user == 'true') {
+        let mail = req.query.mail;
         try {
             const mailOptions = {
                 from: "jomon964510@gmail.com",
                 to: req.query.mail,
                 subject: "hey you can change your password here",
-                html: '<a href="http://localhost:8080/resetPage">Reset pass</a>'
+                html: `<a href="http://localhost:8080/resetPage?mail=${mail}">Reset pass</a>`
             }
             transporter.sendMail(mailOptions, err => {
                 if (err) {
@@ -258,7 +260,7 @@ const resetPass = (req, res) => {
 
 const resetPage = (req, res) => {
     try {
-        res.render('user/resetPass');
+        res.render('user/resetPass',{mail:req.query.mail});
     } catch (err) {
         res.render('user/404')
     }

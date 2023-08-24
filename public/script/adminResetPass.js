@@ -1,8 +1,7 @@
-const showAlert = () => {
+const showAlert = (mail) => {
     const newPass = document.querySelector('#newPass').value;
     const again = document.querySelector('#again').value;
-    const email = document.querySelector('#email').value;
-if(email.length == 0 || newPass.length == 0 || again.length == 0){
+if(newPass.length == 0 || again.length == 0){
     swal("Something went wrong !", "", "warning");
 }else{
     if(newPass.length < 6){
@@ -11,7 +10,7 @@ if(email.length == 0 || newPass.length == 0 || again.length == 0){
         if(newPass == again){
             const bodyObj = {};
             bodyObj.password = again;
-            bodyObj.email = email;
+            bodyObj.email = mail;
             fetch('/admin/updateReset',{
                 method:'post',
                 headers:{
@@ -19,7 +18,7 @@ if(email.length == 0 || newPass.length == 0 || again.length == 0){
                 },
                 body:JSON.stringify({data:bodyObj})
             }).then(res => res.json())
-            .then(res => {
+            .then(res => { 
                 if(res.reset){
                     swal({
                         title: 'Successfully Reseted Your Password ',

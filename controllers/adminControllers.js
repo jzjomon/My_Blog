@@ -190,7 +190,7 @@ const acceptRequest = (req, res) => {
 }
 const resetPage = (req, res) => {
     try{
-        res.render('admin/resetPass')
+        res.render('admin/resetPass',{mail:req.query.mail})
     }catch (err) {
         res.render('admin/404')
     }
