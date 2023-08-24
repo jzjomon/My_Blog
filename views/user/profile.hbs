@@ -103,7 +103,7 @@
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">Profile Update</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                     <form action="/update?id={{userDetails.image.[0].filename}}" method="post" id enctype="multipart/form-data" name="theForm">
+                     <form action="/update?id={{userDetails.image.[0].filename}}" method="post" enctype="multipart/form-data" name="theForm">
                     <div class="modal-body border-0">
                         <div class="container">
                             <div class="row text-center gap-2">
@@ -131,14 +131,14 @@
                         </div>
                     </div>
                     <div class="modal-footer border-0">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="back()">Cancel</button>
                         <button type="button" onclick="return updateAlert()" class="btn btn-primary" >Save</button> 
                     </div>
                     </form>
                 </div>
             </div>
         </div>
-        <form action="/uploadUserBlog?id={{userDetails._id}}" enctype="multipart/form-data" method="post">
+        <form action="/uploadUserBlog?id={{userDetails._id}}" enctype="multipart/form-data" name="theCreateForm" method="post">
                     <div class="modal modal-sm fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable">
@@ -158,7 +158,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <h6>Catogories</h6>
-                                                <select name="catogories" id="" class="rounded ms-1 selecton">
+                                                <select name="catogories" id="" class="rounded ms-1 selectone">
                                                     <option value="">Select one</option>
                                                     <option value="Travel">Travel</option>
                                                     <option value="Technology">Technology</option>
@@ -188,8 +188,8 @@
                                 </div>
                                 <div class="modal-footer border-0">
                                     <button type="button" class="btn btn-danger"
-                                        data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" value="upload" class="btn btn-primary">Create</button>
+                                        data-bs-dismiss="modal" onclick="back()">Cancel</button>
+                                    <button type="button" value="upload" onclick="createPost()" class="btn btn-primary">Create</button>
                                 </div>
                             </div>
                         </div>

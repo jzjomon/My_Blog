@@ -37,33 +37,109 @@ const deletePost = (id) => {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
-      }).then(function(res) {
-        if(res.value){
-            fetch('/admin/deletePost',{
-                method:"delete",
-                headers:{
-                    "Content-Type":"application/json"
+    }).then(function (res) {
+        if (res.value) {
+            fetch('/admin/deletePost', {
+                method: "delete",
+                headers: {
+                    "Content-Type": "application/json"
                 },
-                body:JSON.stringify({postId:id})
+                body: JSON.stringify({ postId: id })
             }).then(response => response.json())
-            .then(res =>{
-                if(res.delete){
-                    swal(
-                        'Deleted!',
-                        'Post has been deleted.',
-                        'success'
-                      ).then(() =>{
-                        window.location.reload()
-                      })  
-                }
-            })
+                .then(res => {
+                    if (res.delete) {
+                        swal(
+                            'Deleted!',
+                            'Post has been deleted.',
+                            'success'
+                        ).then(() => {
+                            window.location.reload()
+                        })
+                    }
+                })
         }
-        
-      })
+
+    })
 }
 
 const signout = () => {
-    localStorage.clear();
-    sessionStorage.clear();
-    location.assign('/admin/signout')
-} 
+    swal({
+        title: 'Are You Sure ?',
+        text: "",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sign Out'
+    }).then(res => {
+        if (res.value) {
+            localStorage.clear();
+            sessionStorage.clear();
+            location.assign('/admin/signout')
+        }
+    })
+}
+
+const block = (id) => {
+    swal({
+        title: 'Are you sure?',
+        text: "Block this person",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Block'
+    }).then(res => {
+        if (res.value) {
+           window.location.href="/admin/blockUser?id="+id;
+        }
+    })
+}
+
+const unblock = (id) => {
+    swal({
+        title: 'Are you sure?',
+        text: "Unblock this person",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Unblock'
+    }).then(res => {
+        if (res.value) {
+           window.location.href="/admin/unblockUser?id="+id;
+        }
+    })
+}
+const creator = (id) => {
+    swal({
+        title: 'Are you sure?',
+        text: "Add this person as a creator ?",
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Accept'
+    }).then(res => {
+        if (res.value) {
+           window.location.href="/admin/acceptRequest?id="+id;
+        }
+    })
+}
+const createPost = () => {
+    swal({
+        title: 'Are You Sure ?',
+        text: "Create Post",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Create'
+    }).then(res => {
+        if (res.value) {
+            swal("","","success").then(res => {
+                document.theCreateForm.submit();
+            })
+        }
+    })
+}

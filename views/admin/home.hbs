@@ -50,7 +50,7 @@
             {{!-- manage section --}}
             <div class="col-sm-9 col-xl-10 ">
                 {{!-- post adding modal --}}
-                <form action="/admin/uploadBlog" enctype="multipart/form-data" method="post">
+                <form action="/admin/uploadBlog" enctype="multipart/form-data" name="theCreateForm" method="post">
                     <div class="modal modal-sm fade" id="staticBackdrop" data-bs-backdrop="static"
                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable">
@@ -95,8 +95,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer border-0">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" value="upload" class="btn btn-primary">Create</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="back()">Cancel</button>
+                                    <button type="button" value="upload" class="btn btn-primary" onclick="createPost()">Create</button>
                                 </div>
                             </div>
                         </div>

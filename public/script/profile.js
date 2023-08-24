@@ -1,7 +1,19 @@
 const logout = () => {
-    localStorage.clear();
-    sessionStorage.clear();
-    location.assign('/logout');
+    swal({
+        title: 'Are You Sure ?',
+        text: "Log Out",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Log Out'
+    }).then(res => {
+        if (res.value) {
+            localStorage.clear();
+            sessionStorage.clear();
+            location.assign('/logout');
+        }
+    })
 }
 const showImg = () => {
     const img = document.getElementById('getImg')
@@ -25,8 +37,8 @@ const updateAlert = () => {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Save'
     }).then(res => {
-        if(res.value){
-           document.theForm.submit();
+        if (res.value) {
+            document.theForm.submit();
         }
     })
 }
@@ -93,4 +105,22 @@ const showUploadImg = () => {
             showImage.appendChild(image);
         }
     }
+}
+
+const createPost = () => {
+    swal({
+        title: 'Are You Sure ?',
+        text: "Create Post",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Create'
+    }).then(res => {
+        if (res.value) {
+            swal("","","success").then(res => {
+                document.theCreateForm.submit();
+            })
+        }
+    })
 }
