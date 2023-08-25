@@ -1,8 +1,8 @@
- const ADMIN = require('../models/adminModel');
+const { USER } = require('../models/userModel');
  const mongoose = require('mongoose');
 
  const getAdminData = (id) =>{
-    return ADMIN.findOne({_id:id},{password:0})
+    return USER.findOne({_id:id,admin:true},{password:0})
  }
 
  module.exports = getAdminData;

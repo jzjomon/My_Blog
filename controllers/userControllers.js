@@ -188,7 +188,7 @@ const specificView = (req, res) => {
     }
 
 }
-const uploadUserBlog = (req, res) => {
+const uploadUserBlog = (req, res) => { 
     try {
         const fileStorage = multer.diskStorage({
             destination: (req, file, callback) => {

@@ -23,8 +23,8 @@
             <div class="col-12 p-3 ps-5 d-flex  justify-content-between">
                 <span class="fs-3 fw-bold">My Blog</span>
                 <span class="fs-5 pe-2">
-                    <span>{{adminDetails.name}}</span>
-                    <button class="rounded-3 ps-2 pe-2 " onclick="signout()">Sign Out</button>
+                    <span>{{adminDetails.firstName}} {{adminDetails.lastName}}<span>
+                    <button class="rounded-3 btn btn-outline-danger ps-2 pe-2 " onclick="signout()">Sign Out</button>
                 </span>
             </div>
         </div>
@@ -39,6 +39,10 @@
                     <div class="row">
                         <div class="col text-center p-3 manages"><a href="#"
                                 class="text-decoration-none text-white">Manage Users</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center p-3 manages"><a href="#" class="text-decoration-none text-white"
+                                onclick="">Manage Topics</a></div>
                     </div>
 
                 </div>
@@ -64,20 +68,20 @@
                                     <td class="td text-center">
                                         {{#if this.requestCreator}}
                                         <a class="text-decoration-none">
-                                            <button class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block" onclick="creator('{{this._id}}')">
+                                            <button class="btn btn-outline-success ps-2 mt-2 mb-2 pe-2 rounded-3 block" onclick="creator('{{this._id}}')">
                                                 Accept request
                                             </button>
                                         </a>
                                         {{/if}}
                                         {{#if this.status}}
                                         <a>
-                                            <button class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block"
+                                            <button class="btn btn-outline-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block"
                                                 onclick="block('{{this._id}}')">Block
                                                 User</button>
                                         </a>
                                         {{else}}
                                         <a>
-                                            <button class="text-danger ps-2 mt-2 mb-2 pe-2 rounded-3 block" onclick="unblock('{{this._id}}')">
+                                            <button class="btn btn-outline-success ps-2 mt-2 mb-2 pe-2 rounded-3 block" onclick="unblock('{{this._id}}')">
                                                 Unblock User
                                             </button>
                                         </a>

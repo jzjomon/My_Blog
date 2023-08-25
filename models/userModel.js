@@ -32,10 +32,14 @@ const userSchema = mongoose.Schema({
         type:Boolean,
         default:false
     },
+    admin:{
+        type:Boolean,
+        default:false
+    }, 
     place:{
         type:String
     },
-    image:[]
+    image:[] 
 })
 const USER = mongoose.model('users',userSchema);
 

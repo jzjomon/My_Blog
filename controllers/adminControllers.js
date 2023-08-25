@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const multer = require('multer');
-const ADMIN = require('../models/adminModel');
 const UPLOADS = require('../models/blogModel');
 const { USER } = require('../models/userModel');
 const jwt = require('jsonwebtoken');
@@ -21,7 +20,7 @@ const login = (req, res) => {
 }
 const doLogin = (req, res) => {
     try {
-        ADMIN.findOne({ email: req.body.email, password: req.body.password }).then((response) => {
+        USER.findOne({ email: req.body.email,admin: true, password: req.body.password }).then((response) => {
             if (response) {
                 const token = jwt.sign({ id: response._id }, process.env.JWT_PASS, { expiresIn: "2d" });
                 res.cookie("adminToken", token, {
@@ -84,6 +83,7 @@ const uploadBlog = (req, res) => {
                 heading: req.body.heading,
                 catogory:req.body.catogories,
                 content: req.body.content,
+                createdBy: req.query.id,
                 images: req.files
             }).save().then((response) => {
                 res.redirect('/admin/home?page=1');
@@ -197,13 +197,21 @@ const resetPage = (req, res) => {
 }
 const updateReset = (req, res) => {
     try{
-        ADMIN.findOneAndUpdate({ email: req.body.data.email }, { password: req.body.data.password }).then(response => {
+        USER.findOneAndUpdate({ email: req.body.data.email, admin:true }, { password: req.body.data.password }).then(response => {
             res.json({ reset: true })
         })
     }catch (err) {
         res.render('admin/404')
     }
 }
+const specificView = (req,res) => {
+    try{
+        UPLOADS.find({createdBy:req.query.id}).then(response => {
+            res.render('admin/specificView.hbs', { posts: response });
+        })
+    }catch(err){
+        res.render('admin/404')
+    }
+}
 
-
-module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser, requestCreator, check, acceptRequest, manageUser, resetPage, updateReset };
+module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser, requestCreator, check, acceptRequest, manageUser, resetPage, updateReset, specificView };

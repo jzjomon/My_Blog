@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
-        <script src="https://kit.fontawesome.com/2cca22d63c.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/2cca22d63c.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -24,8 +24,8 @@
             <div class="col-12 p-3 ps-5 d-flex  justify-content-between">
                 <span class="fs-3 fw-bold">My Blog</span>
                 <span class="fs-5 pe-2">
-                    <span>{{adminDetails.name}}</span>
-                    <button class="rounded-3 ps-2 pe-2 " onclick="signout()">Sign Out</button>
+                    <span>{{adminDetails.firstName}} {{adminDetails.lastName}}</span>
+                    <button class="rounded-3 ps-2 btn btn-outline-danger pe-2 " onclick="signout()">Sign Out</button>
                 </span>
             </div>
         </div>
@@ -41,16 +41,16 @@
                         <div class="col text-center p-3 manages"><a href="/admin/manageUser?page=1"
                                 class="text-decoration-none text-white">Manage Users</a></div>
                     </div>
-                    {{!-- <div class="row">
+                    <div class="row">
                         <div class="col text-center p-3 manages"><a href="#" class="text-decoration-none text-white"
                                 onclick="showTopic()">Manage Topics</a></div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
             {{!-- manage section --}}
             <div class="col-sm-9 col-xl-10 ">
                 {{!-- post adding modal --}}
-                <form action="/admin/uploadBlog" enctype="multipart/form-data" name="theCreateForm" method="post">
+                <form action="/admin/uploadBlog?id={{adminDetails._id}}" enctype="multipart/form-data" name="theCreateForm" method="post">
                     <div class="modal modal-sm fade" id="staticBackdrop" data-bs-backdrop="static"
                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable">
@@ -95,8 +95,10 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer border-0">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="back()">Cancel</button>
-                                    <button type="button" value="upload" class="btn btn-primary" onclick="createPost()">Create</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                        onclick="back()">Cancel</button>
+                                    <button type="button" value="upload" class="btn btn-primary"
+                                        onclick="createPost()">Create</button>
                                 </div>
                             </div>
                         </div>
@@ -105,10 +107,11 @@
                 {{!-- manage post section --}}
                 <div class="container-fluid manage-post">
                     <div class="row p-2">
-                        <div class="col">
-                            <button class="addpost ps-1 pe-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><a
-                                    href="#" class="text-decoration-none text-black">Add
-                                    Post</a></button>
+                        <div class="col d-flex justify-content-around">
+                            <button class="addpost btn btn-outline-success" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                Add Post</button>
+                                <a href="/admin/specificView?id={{adminDetails._id}}" class="text-decoraion-none btn btn-outline-success">My Posts</a>
                         </div>
                     </div>
                     <div class="row">
@@ -123,15 +126,15 @@
                                 </tr>
                                 {{#each posts}}
                                 <tr>
-                                    <td class="td td-r ps-2 slNo"></td>
+                                    <td class="td td-r  ps-2 slNo"></td>
                                     <td class="td td-r ps-2">{{this.date}}</td>
                                     <td class="td td-r p-1 ps-2">
                                         <p id="contentshow">{{this.content}}</p>
                                     </td>
                                     <td class="td text-center">
-                                        <a class="text-success text-decoration-none me-4 view-option"
+                                        <a class=" btn btn-outline-success text-decoration-none me-4 view-option"
                                             href="/admin/viewPage?id={{this._id}}">view</a>
-                                        <button id="delete" class="text-danger ps-2 pe-2 rounded-3"
+                                        <button id="delete" class="btn btn-outline-danger ps-2 pe-2 rounded-3"
                                             onclick="deletePost('{{this._id}}')">delete</button>
                                     </td>
                                 </tr>
