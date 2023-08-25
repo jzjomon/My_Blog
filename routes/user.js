@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {login,signup,dosignup,dologin,Home,Profile,detailedView,logout,update,specificView, uploadUserBlog, resetPass, resetPage, updateReset, removePost} = require('../controllers/userControllers');
+const {login,signup,dosignup,dologin,Home,Profile,detailedView,logout,update,specificView, uploadUserBlog, resetPass, resetPage, updateReset, removePost, about} = require('../controllers/userControllers');
 const {userAuth} = require('../middlewares/userAuth')
 const paginate = require('../middlewares/paginate')
 
@@ -19,6 +19,7 @@ router.get('/resetPass',resetPass)
 router.get('/resetPage',resetPage)
 router.post('/updateReset',updateReset)
 router.get('/removePost',userAuth,removePost)
+router.get('/about',userAuth,about)
 
 
 module.exports=router;

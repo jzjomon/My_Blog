@@ -298,5 +298,13 @@ const removePost = (req, res) => {
         res.render('user/404')
     }
 }
+const about = (req, res) => {
+    try{
+        res.render('user/about')
+    }
+    catch (err){
+        res.render('user/404')
+    }
+}
 
-module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView, uploadUserBlog, resetPass, resetPage, updateReset, removePost }
+module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView, uploadUserBlog, resetPass, resetPage, updateReset, removePost, about }
