@@ -143,3 +143,9 @@ const createPost = () => {
         }
     })
 }
+const manageTopic = () => {
+    const value = document.querySelector('#manageTopicValue').value;
+    if(value != "Manage Topics"){
+        window.location.href = `/admin/specificView?cat=${value}`
+    }
+}

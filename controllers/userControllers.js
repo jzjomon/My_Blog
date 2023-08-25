@@ -12,7 +12,7 @@ const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
-    auth:{
+    auth: {
         user: process.env.MAIL,
         pass: process.env.MAIL_PASS
     }
@@ -125,12 +125,12 @@ const logout = (req, res) => {
         req.cookies.userToken = null;
         res.redirect('/')
     } catch (err) {
-        res.render('user/404') 
+        res.render('user/404')
     }
 }
 const update = (req, res) => {
     try {
-        const fileStorage = multer.diskStorage({ 
+        const fileStorage = multer.diskStorage({
             destination: (req, file, callback) => {
                 callback(null, "public/assets")
             },
@@ -151,13 +151,15 @@ const update = (req, res) => {
                 userdata.place = req.body.place;
             } else if (req.files != "") {
                 userdata.image = req.files;
-                const filePath = path.join(__dirname, '..', 'public/assets', req.query.id);
-                fs.unlinkSync(filePath);
+                if (req.query.id) {
+                    const filePath = path.join(__dirname, '..', 'public/assets', req.query.id);
+                    fs.unlinkSync(filePath);
+                }
             }
             const parsedCookie = parseJwt(req.cookies.userToken)
             USER.findOneAndUpdate({ _id: parsedCookie.userid }, {
                 firstName: userdata.firstname,
-                lastName: userdata.lastname, 
+                lastName: userdata.lastname,
                 work: userdata.work,
                 place: userdata.place,
                 image: userdata.image
@@ -188,7 +190,7 @@ const specificView = (req, res) => {
     }
 
 }
-const uploadUserBlog = (req, res) => { 
+const uploadUserBlog = (req, res) => {
     try {
         const fileStorage = multer.diskStorage({
             destination: (req, file, callback) => {
@@ -229,7 +231,7 @@ const resetPass = (req, res) => {
             transporter.sendMail(mailOptions, err => {
                 if (err) {
                     res.render('admin/404')
-                }else{
+                } else {
                     res.redirect('/admin/')
                 }
             })
@@ -248,7 +250,7 @@ const resetPass = (req, res) => {
             transporter.sendMail(mailOptions, err => {
                 if (err) {
                     res.render('user/404')
-                }else{
+                } else {
                     res.redirect('/')
                 }
             })
@@ -260,7 +262,7 @@ const resetPass = (req, res) => {
 
 const resetPage = (req, res) => {
     try {
-        res.render('user/resetPass',{mail:req.query.mail});
+        res.render('user/resetPass', { mail: req.query.mail });
     } catch (err) {
         res.render('user/404')
     }

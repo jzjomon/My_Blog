@@ -206,9 +206,16 @@ const updateReset = (req, res) => {
 }
 const specificView = (req,res) => {
     try{
-        UPLOADS.find({createdBy:req.query.id}).then(response => {
-            res.render('admin/specificView.hbs', { posts: response });
-        })
+        if(req.query.id){
+            UPLOADS.find({createdBy:req.query.id}).then(response => {
+                res.render('admin/specificView.hbs', { posts: response });
+            })
+        }
+        else if(req.query.cat){
+            UPLOADS.find({catogory:req.query.cat}).then(response => {
+                res.render('admin/specificView.hbs', {posts: response})
+            })
+        }
     }catch(err){
         res.render('admin/404')
     }

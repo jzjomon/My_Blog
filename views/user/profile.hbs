@@ -103,7 +103,11 @@
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">Profile Update</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                     <form action="/update?id={{userDetails.image.[0].filename}}" method="post" enctype="multipart/form-data" name="theForm">
+                     <form {{#if userDetails.image.[0].filename}}
+                        action="/update?id={{userDetails.image.[0].filename}}"
+                           {{else}}
+                            action="/update"
+                     {{/if}} method="post" enctype="multipart/form-data" name="theForm">
                     <div class="modal-body border-0">
                         <div class="container">
                             <div class="row text-center gap-2">
