@@ -220,5 +220,21 @@ const specificView = (req,res) => {
         res.render('admin/404')
     }
 }
+const deleteAdminPost = (req, res) => {
+    UPLOADS.findOne({_id:req.query.postId}).then(selectedPost =>{
+        UPLOADS.deleteOne({_id:req.query.postId}).then(response => {   
+          for(x of selectedPost.images){
+            const filePath = path.join(__dirname,'..','public/assets',x.filename)
+            fs.unlink(filePath, err =>{
+                if(err){
+                    res.render('admin/404')
+                }else{
+                    res.redirect('/admin/home')
+                }
+            })
+          } 
+        })
+    }) 
+}
 
-module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser, requestCreator, check, acceptRequest, manageUser, resetPage, updateReset, specificView };
+module.exports = { login, doLogin, home, uploadBlog, blockUser, removePost, viewPage, signout, unblockUser, requestCreator, check, acceptRequest, manageUser, resetPage, updateReset, specificView, deleteAdminPost };

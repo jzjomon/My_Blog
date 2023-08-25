@@ -12,6 +12,9 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/2cca22d63c.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
@@ -149,14 +152,17 @@
                 </div>
                 {{!-- contents --}}
                 <div class="col-xl-6 col-sm-12 p-3 text-center">
-                    <h5 class="border border-dark d-flex justify-content-around rounded pt-2 pb-2">{{this.heading}} <button class="fs-6 rounded ps-1 pe-1 btn-outline-danger btn pt-1 pb-1">delete</button></h5>
+                    <h5 class="border border-dark d-flex justify-content-around rounded pt-2 pb-2">{{this.heading}} <button class="fs-6 rounded ps-1 pe-1 btn-outline-danger btn pt-1 pb-1" onclick="deleteAdminPost('{{this._id}}')">delete</button></h5>
                     <p>{{this.content}}</p>
                 </div>
             </div>
             {{/each}}
+             {{else}}
+               <h1 class="text-center">There is no posts</h1>
             {{/if}}
         </div>
     </section>
+    <script src="/script/specificView.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {login,doLogin,home,uploadBlog,blockUser,removePost,viewPage,signout,unblockUser,requestCreator,check, acceptRequest, manageUser, resetPage, updateReset, specificView} = require('../controllers/adminControllers')
+const {login,doLogin,home,uploadBlog,blockUser,removePost,viewPage,signout,unblockUser,requestCreator,check, acceptRequest, manageUser, resetPage, updateReset, specificView, deleteAdminPost } = require('../controllers/adminControllers')
 const adminAuth = require('../middlewares/adminAuth')
 const paginate = require('../middlewares/paginate')
 
@@ -20,5 +20,6 @@ router.get('/manageUser',adminAuth,manageUser)
 router.get('/resetPage',resetPage)
 router.post('/updateReset',updateReset)
 router.get('/specificView',adminAuth,specificView)
+router.get('/deleteAdminPost',adminAuth,deleteAdminPost)
 
 module.exports=router;

@@ -277,5 +277,26 @@ const updateReset = (req, res) => {
     }
 
 }
+const removePost = (req, res) => {
+    try{
+        UPLOADS.findOne({_id:req.query.postId}).then(selectedPost =>{
+            UPLOADS.deleteOne({_id:req.query.postId}).then(response => {   
+              for(x of selectedPost.images){
+                const filePath = path.join(__dirname,'..','public/assets',x.filename)
+                fs.unlink(filePath, err =>{
+                    if(err){
+                        res.render('user/404')
+                    }else{
+                    res.redirect('/profile')
+                    }
+                })
+              } 
+            })
+        }) 
+    }
+    catch (err) {
+        res.render('user/404')
+    }
+}
 
-module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView, uploadUserBlog, resetPass, resetPage, updateReset }
+module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView, uploadUserBlog, resetPass, resetPage, updateReset, removePost }
