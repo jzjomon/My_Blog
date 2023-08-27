@@ -124,3 +124,19 @@ const createPost = () => {
         }
     })
 }
+const more = document.getElementById('more')
+const showRemovePic = (data) =>{
+    more.style.position = "relative";
+    const btn = document.createElement('button')
+    btn.innerHTML = "remove pic";
+    btn.id = "removebtn"
+    btn.onclick = () => {
+        window.location.href = "/removeDp?name="+data;
+    }
+    btn.style.cssText = `position: absolute; font-size: 8px; padding: 1px; border-radius: 5px; `
+    more.appendChild(btn);
+}
+const hideRemovePic = () => {
+    const btn = document.querySelector('#removebtn')
+    more.removeChild(btn)
+}

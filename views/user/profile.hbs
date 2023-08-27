@@ -49,6 +49,7 @@
                             <div class="col-12 d-flex justify-content-center mt-5 mb-2 ">
                                 {{#if userDetails.image.[0].filename}}
                                    <img src="/assets/{{userDetails.image.[0].filename}}" alt="" class="img ">
+                                   <i class="fa-solid fa-ellipsis-vertical " id="more" onmouseenter="showRemovePic('{{userDetails.image.[0].filename}}')" onmouseleave="hideRemovePic()"></i>
                                    {{else}}
                                       <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" class="default-img ">
                                 {{/if}}

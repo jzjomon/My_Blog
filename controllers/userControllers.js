@@ -278,33 +278,47 @@ const updateReset = (req, res) => {
 
 }
 const removePost = (req, res) => {
-    try{
-        UPLOADS.findOne({_id:req.query.postId}).then(selectedPost =>{
-            UPLOADS.deleteOne({_id:req.query.postId}).then(response => {   
-              for(x of selectedPost.images){
-                const filePath = path.join(__dirname,'..','public/assets',x.filename)
-                fs.unlink(filePath, err =>{
-                    if(err){
-                        res.render('user/404')
-                    }else{
-                    res.redirect('/profile')
-                    }
-                })
-              } 
+    try {
+        UPLOADS.findOne({ _id: req.query.postId }).then(selectedPost => {
+            UPLOADS.deleteOne({ _id: req.query.postId }).then(response => {
+                for (x of selectedPost.images) {
+                    const filePath = path.join(__dirname, '..', 'public/assets', x.filename)
+                    fs.unlink(filePath, err => {
+                        if (err) {
+                            res.render('user/404')
+                        } else {
+                            res.redirect('/profile')
+                        }
+                    })
+                }
             })
-        }) 
+        })
     }
     catch (err) {
         res.render('user/404')
     }
 }
 const about = (req, res) => {
-    try{
+    try {
         res.render('user/about')
     }
-    catch (err){
+    catch (err) {
         res.render('user/404')
     }
 }
+const removeDp = (req, res) => {
+    try {
+        const filePath = path.join(__dirname, '../', 'public/assets', req.query.name);
+        const id = parseJwt(req.cookies.userToken);
+        USER.findOneAndUpdate({ _id: id.userid }, { image: [] }).then(response => {
+            fs.unlink(filePath, () => {
+                res.redirect('/profile')
+            })
+        })
+    }
+    catch (err) {
+        res.render("user/404");
+    }
+}
 
-module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView, uploadUserBlog, resetPass, resetPage, updateReset, removePost, about }
+module.exports = { login, signup, dosignup, dologin, Home, Profile, detailedView, logout, update, specificView, uploadUserBlog, resetPass, resetPage, updateReset, removePost, about, removeDp }
