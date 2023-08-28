@@ -225,7 +225,7 @@ const deleteAdminPost = (req, res) => {
         UPLOADS.deleteOne({_id:req.query.postId}).then(response => {   
           for(x of selectedPost.images){
             const filePath = path.join(__dirname,'..','public/assets',x.filename)
-            fs.unlink(filePath, err =>{
+            fs.unlink(filePath, err =>{ 
                 if(err){
                     res.render('admin/404')
                 }else{
