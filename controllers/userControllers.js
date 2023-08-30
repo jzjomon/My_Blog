@@ -183,13 +183,15 @@ const specificView = (req, res) => {
             })
         }
         else if(req.query.name){
-            USER.findOne({$or:[{firstName:req.query.name},{lastName:req.query.name}]}).then(result => {
+            const str = req.query.name;
+            const newStr = str.split(" ");
+            USER.findOne({$or:[{firstName:newStr[0]},{lastName:newStr[1]}]}).then(result => {
                 if(result){
                     UPLOADS.find({createdBy:result._id}).then(result => {
                         res.render('user/specificView.hbs', { search: result });
                     })
                 }else{
-                    UPLOADS.find({$or:[{catogory:req.query.name},{heading:req.query.name}]}).then(result => {
+                    UPLOADS.find({$or:[{catogory:str},{heading:str}]}).then(result => {
                         res.render('user/specificView.hbs', { search: result });
                     })
                 }
