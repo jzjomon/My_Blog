@@ -183,20 +183,19 @@ const specificView = (req, res) => {
             })
         }
         else if(req.query.name){
-            USER.findOne({firstName:req.query.name}).then(result => {
-                if(result == null){
-                    res.render('user/404');
-                }else{
-                    let id = result._id; 
-                    UPLOADS.find({createdBy:id}).then(result => {
-                        res.render('user/specificView.hbs',{ search: result})
-                    }).catch(err => {
-                        res.render('user/404')
+            USER.findOne({$or:[{firstName:req.query.name},{lastName:req.query.name}]}).then(result => {
+                if(result){
+                    UPLOADS.find({createdBy:result._id}).then(result => {
+                        res.render('user/specificView.hbs', { search: result });
                     })
-                } 
+                }else{
+                    UPLOADS.find({$or:[{catogory:req.query.name},{heading:req.query.name}]}).then(result => {
+                        res.render('user/specificView.hbs', { search: result });
+                    })
+                }
             })
         }
-        else if (req.query.userId) {
+        else if (req.query.userId) { 
             UPLOADS.find({ createdBy: req.query.userId }).then(response => {
                 res.render('user/specificView.hbs', { posts: response });
             }).catch(err => {
