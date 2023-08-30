@@ -178,11 +178,29 @@ const specificView = (req, res) => {
         if (req.query.id) {
             UPLOADS.find({ catogory: req.query.id }).then(response => {
                 res.render('user/specificView.hbs', { data: response });
+            }).catch(err => {
+                res.render('user/404')
+            })
+        }
+        else if(req.query.name){
+            USER.findOne({firstName:req.query.name}).then(result => {
+                if(result == null){
+                    res.render('user/404');
+                }else{
+                    let id = result._id; 
+                    UPLOADS.find({createdBy:id}).then(result => {
+                        res.render('user/specificView.hbs',{ search: result})
+                    }).catch(err => {
+                        res.render('user/404')
+                    })
+                } 
             })
         }
         else if (req.query.userId) {
             UPLOADS.find({ createdBy: req.query.userId }).then(response => {
                 res.render('user/specificView.hbs', { posts: response });
+            }).catch(err => {
+                res.render('user/404')
             })
         }
     } catch (err) {
