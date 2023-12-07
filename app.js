@@ -12,6 +12,7 @@ const cookieParser = require('cookie-parser');
 app.set('view engine','hbs');
 app.set('views',path.join(__dirname,'views'));
 
+connectDB();
 
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended:true}));
@@ -25,7 +26,6 @@ app.use('/',(req,res,next)=>{
 app.use('/admin',admin);
 app.use('/',user);
 
-connectDB();
 
 app.listen(process.env.PORT,(err)=>{
     if(err){
